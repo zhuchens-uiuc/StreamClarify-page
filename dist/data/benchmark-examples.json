@@ -30,11 +30,15 @@
         "frameIndex": 30,
         "imageSha256": "55627cadcb8b7c820502426efcbca075ff5d22add5d45c651340f47bfd5d9e2e",
         "transform": "crop=448:336:0:56",
-        "transformNote": "Only existing black letterbox padding is removed. Scene pixels are not cropped or annotated. JPEG encoding uses FFmpeg q:v=2."
+        "transformNote": "Only existing black letterbox padding is removed. Scene pixels are not cropped or annotated. JPEG encoding uses FFmpeg q:v=2.",
+        "videoSha256": "e5291d1eabec430bdf842ca032ca4d2fed387b17e9cd2baaf8f7e7549bea206b"
       },
       "title": "A drill on the windowsill",
       "meaning": "The question names a specific tool. Its reference annotation locates that tool on the windowsill.",
-      "construction": "Retain a well-specified source question."
+      "construction": "Retain a well-specified source question.",
+      "video": "assets/benchmark-standard.mp4",
+      "clipStartSeconds": 7,
+      "clipEndSeconds": 15
     },
     {
       "id": "standard-teapot",
@@ -73,8 +77,12 @@
           69.0,
           75.0
         ],
-        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly."
-      }
+        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly.",
+        "videoSha256": "35864ddc0e782ff6ff786b9617ebde71cff687a9ff72ca818fad6813d00c076f"
+      },
+      "video": "assets/benchmark-standard-teapot.mp4",
+      "clipStartSeconds": 64,
+      "clipEndSeconds": 72
     },
     {
       "id": "standard-eggplant",
@@ -118,8 +126,12 @@
           237.0,
           243.0
         ],
-        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly."
-      }
+        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly.",
+        "videoSha256": "6f44b1cef56f358ab6d3bf24b8adb23e47630c79ff9ad74ac96850dedb2cc1e4"
+      },
+      "video": "assets/benchmark-standard-eggplant.mp4",
+      "clipStartSeconds": 234,
+      "clipEndSeconds": 242
     },
     {
       "id": "ambiguous",
@@ -150,12 +162,16 @@
         "frameIndex": 40,
         "imageSha256": "2856bba021661d1dcb9b146ef9dbf29ab4fb6fdb96c25d38b983cbc4364402c0",
         "transform": "crop=448:336:0:56",
-        "transformNote": "Only existing black letterbox padding is removed. Scene pixels are not cropped or annotated. JPEG encoding uses FFmpeg q:v=2."
+        "transformNote": "Only existing black letterbox padding is removed. Scene pixels are not cropped or annotated. JPEG encoding uses FFmpeg q:v=2.",
+        "videoSha256": "c9f8b69b3063a7e4d7f9d5beb5c722f4ccda223523623c0775c88dad4d43f335"
       },
       "title": "Which object is “this”?",
       "meaning": "The original question names the electric drill; the rewritten question replaces it with “this”.",
       "construction": "Replace the specific object description with a pronoun.",
-      "ambiguityExplanation": "A red drill and a grey sweatshirt are both visible, but “this” does not specify the object. The source question identifies the drill."
+      "ambiguityExplanation": "“This” could refer to the drill or the sweatshirt.",
+      "video": "assets/benchmark-ambiguous.mp4",
+      "clipStartSeconds": 12,
+      "clipEndSeconds": 20
     },
     {
       "id": "ambiguous-apron",
@@ -194,8 +210,12 @@
           93.0,
           99.0
         ],
-        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly."
-      }
+        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly.",
+        "videoSha256": "e2561875d57c5b5fe679f6f811f88236164bb632c0afa2c9628e3b2b333f2d72"
+      },
+      "video": "assets/benchmark-ambiguous-apron.mp4",
+      "clipStartSeconds": 87,
+      "clipEndSeconds": 95
     },
     {
       "id": "ambiguous-bed",
@@ -239,8 +259,12 @@
           156.0,
           162.0
         ],
-        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly."
-      }
+        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly.",
+        "videoSha256": "d68dd35709f916333a4ca15ffe8e635c4af474c316c29c4f893ed7c0d52efa6e"
+      },
+      "video": "assets/benchmark-ambiguous-bed.mp4",
+      "clipStartSeconds": 150,
+      "clipEndSeconds": 158
     },
     {
       "id": "unanswerable",
@@ -276,18 +300,22 @@
         "frameIndex": 6,
         "imageSha256": "31c077da98b1895b3e22d8662e7361d94287b327102dc3a558921b897355f121",
         "transform": "crop=448:252:0:98",
-        "transformNote": "Only existing black letterbox padding is removed. Scene pixels are not cropped or annotated. JPEG encoding uses FFmpeg q:v=2."
+        "transformNote": "Only existing black letterbox padding is removed. Scene pixels are not cropped or annotated. JPEG encoding uses FFmpeg q:v=2.",
+        "videoSha256": "a74e1b9d3234b96bcd40abe14e55098391f75518d2acbbd2865c382a07e09c42"
       },
       "title": "A missing color option",
-      "meaning": "The hat is visible, but its original color answer is removed from the choices. None of the offered color options is supported.",
-      "construction": "Remove the original answer and add “None of the above”."
+      "meaning": "The hat is black. Black is missing from the offered choices.",
+      "construction": "Remove the original answer and add “None of the above”.",
+      "video": "assets/benchmark-unanswerable.mp4",
+      "clipStartSeconds": 0,
+      "clipEndSeconds": 5.0
     },
     {
       "id": "unanswerable-device",
       "type": "evidence_absent",
       "label": "Unanswerable QA",
       "title": "A missing device option",
-      "meaning": "The source answer identifies a black massage gun. That device is absent from the offered choices: a phone charger, a power bank and a vacuum cleaner.",
+      "meaning": "The source answer is a massage gun, which is missing from the choices.",
       "construction": "Remove the supported device identity and add “None of the above”.",
       "dataset": "StreamBench",
       "sampleId": "StreamBench:080ae20b-7914-49ff-8c1c-e384599f2b7a:25",
@@ -324,15 +352,19 @@
           3.0,
           9.0
         ],
-        "captionNote": "Contextual offline caption, not model input. The displayed frame was inspected directly."
-      }
+        "captionNote": "Contextual offline caption, not model input. The displayed frame was inspected directly.",
+        "videoSha256": "15e37d7bb66069a4f3da62d9d42ed588ebccbe16eef916f662b28aff8b2cf7c2"
+      },
+      "video": "assets/benchmark-unanswerable-device.mp4",
+      "clipStartSeconds": 0,
+      "clipEndSeconds": 8
     },
     {
       "id": "unanswerable-oil",
       "type": "evidence_absent",
       "label": "Unanswerable QA",
       "title": "An uncertain past action",
-      "meaning": "This native HLD question asks whether a particular past action occurred. OVO-Bench labels it “Unable to answer”; the illustrated still alone cannot establish absence across the observed video.",
+      "meaning": "OVO-Bench labels this question “Unable to answer”. The excerpt does not establish what happened throughout the prefix.",
       "construction": "Retain the native OVO-Bench HLD question, options and reference label.",
       "dataset": "OVO-Bench",
       "sampleId": "OVO-Bench:ec4a3ba3-eb00-4aa8-9b41-36043ece98f7:359",
@@ -368,10 +400,14 @@
           351.0,
           357.0
         ],
-        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly."
-      }
+        "captionNote": "Contextual offline caption, not model input or proof that an event is absent. The displayed frame was inspected directly.",
+        "videoSha256": "fcd69725d60de653b7832ef13c95323c6ff8b33b989d9e2d49b4926d0cfb0f46"
+      },
+      "video": "assets/benchmark-unanswerable-oil.mp4",
+      "clipStartSeconds": 351,
+      "clipEndSeconds": 359
     }
   ],
-  "note": "These are real benchmark questions, reference annotations and causal video frames, not model outputs or a measure of model success. Each frame illustrates part of the observed prefix; a still image is not the complete video evidence.",
+  "note": "Short video excerpts from the observed prefix. Questions and answers are reference annotations.",
   "unanswerableNote": "Constructed StreamBench examples remove the original supported answer and include None of the above. Native OVO-Bench HLD examples preserve their original question, options and Unable to answer label; an individual displayed frame does not prove that information is absent over the entire prefix."
 }

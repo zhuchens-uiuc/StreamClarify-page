@@ -10,26 +10,35 @@ START = '<!-- benchmark-examples:start -->'
 END = '<!-- benchmark-examples:end -->'
 TYPES = [
     ('standard', 'Standard', 995, 'Well-specified questions with a supported answer.'),
-    ('ambiguous', 'Referential ambiguity', 302, 'Questions with an unclear intended referent.'),
+    ('ambiguous', 'Ambiguous', 302, 'Questions with an unclear intended referent.'),
     ('evidence_absent', 'Unanswerable', 540, 'No supported substantive answer option.'),
 ]
 
 
+def timestamp(seconds):
+    return f'{int(seconds // 60):02d}:{int(seconds % 60):02d}'
+
+
 def render_sample(example, visible):
     ex = example
-    # Some source records append MCQ options to this string. They are displayed
-    # once with the benchmark question; the JSON retains the complete source.
     original_text = (ex.get('originalQuestion') or '').split(' Options:', 1)[0]
-    original = (f'<p class="annotation-source"><span>Source question</span>{escape(original_text)}</p>'
+    original = (f'<details class="benchmark-reference"><summary>Source question</summary><p class="annotation-source">{escape(original_text)}</p></details>'
                 if ex.get('originalQuestion') else '')
     options = ('<ol class="benchmark-options">' + ''.join(f'<li>{escape(o)}</li>' for o in ex['options']) + '</ol>'
                if ex['options'] else '')
     explanation = ex.get('ambiguityExplanation') or (ex.get('meaning') if ex['type'] == 'evidence_absent' else '')
     meaning = (f'<p class="annotation-meaning">{escape(explanation)}</p>' if explanation else '')
     title = escape(ex.get('title', ex['label']), quote=True)
-    return f'''<article class="benchmark-sample" id="benchmark-sample-{ex['id']}" data-benchmark="{ex['id']}" data-title="{title}" aria-label="{title}"{'' if visible else ' hidden'}>
-          <figure><img src="{ex['image']}" alt="{escape(ex['alt'], quote=True)}" width="{ex['width']}" height="{ex['height']}" loading="lazy"><figcaption>Frame {ex['frameTimeSeconds']:g}s · question {ex['queryTimeSeconds']:g}s · {escape(ex['dataset'])}</figcaption></figure>
-          {original}<p class="annotation-question"><span>Question</span>{escape(ex['question'])}</p>{options}<p class="annotation-answer"><span>Reference annotation</span>{escape(ex['referenceAnswer'])}</p>{meaning}
+    start, end, query = ex['clipStartSeconds'], ex['clipEndSeconds'], ex['queryTimeSeconds']
+    offset, width = start / query * 100, (end - start) / query * 100
+    return f'''<article class="benchmark-sample" id="benchmark-sample-{ex['id']}" data-benchmark="{ex['id']}" data-title="{title}" data-clip-start="{start:g}" data-clip-end="{end:g}" data-query="{query:g}" aria-label="{title}"{'' if visible else ' hidden'}>
+          <figure>
+            <div class="benchmark-video-shell"><video src="{ex['video']}" poster="{ex['image']}" aria-label="{escape(ex['alt'], quote=True)} Video excerpt from {timestamp(start)} to {timestamp(end)}." width="{ex['width']}" height="{ex['height']}" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>{timestamp(start)}–{timestamp(end)}</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to {timestamp(query)}. Highlighted excerpt: {timestamp(start)} to {timestamp(end)}."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:{offset:.4f}%;width:{width:.4f}%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>{timestamp(query)}</span></div></div>
+            <figcaption>{escape(ex['dataset'])} · Question at {timestamp(query)}</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>{escape(ex['question'])}</p>{options}<p class="annotation-answer"><span>Reference answer</span>{escape(ex['referenceAnswer'])}</p>{meaning}{original}</div>
         </article>'''
 
 
@@ -37,7 +46,6 @@ def render_gallery(examples):
     columns = []
     for type_id, label, count, definition in TYPES:
         group = [ex for ex in examples if ex['type'] == type_id]
-        # A different scene in each default column makes the category comparison clearer.
         if type_id == 'standard' and len(group) > 1:
             group = group[1:] + group[:1]
         if not group:

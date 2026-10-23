@@ -31,8 +31,8 @@
       <h1 id="title">StreamClarify</h1>
       <p class="paper-title">Proactive Clarification for Grounded<br class="desktop-break"> Streaming Video Question Answering</p>
       <p class="authors"><a href="https://zhuchens-uiuc.github.io/">Zhuchen Shao</a><span>Bo Chen</span><span>Klara Nahrstedt</span></p>
-      <div class="paper-links"><a href="#method">Method animation</a></div>
-      <p class="hero-summary">A pre-answer uncertainty check for streaming video QA,<br> with bounded active context and guidance-driven retrieval.</p>
+      <div class="paper-links"><a href="#method">Method animation</a><a href="#benchmark">Video questions</a></div>
+      <p class="hero-summary">Check when to ask.<br>Retrieve past video with user guidance.</p>
     </section>
 
     <div class="wrap overview-figure">
@@ -84,13 +84,12 @@
 
     <section id="setting" class="wrap setting-section" aria-labelledby="setting-title">
       <div class="section-heading"><div><p class="eyebrow">Setting</p><h2 id="setting-title">A question arrives while the video continues</h2></div></div>
-      <p class="setting-intro">At query time <i>t</i><sub>i</sub>, a frozen streaming VLM receives a question <i>Q</i><sub>i</sub> and can use only the video prefix observed so far.</p>
-      <div class="setting-rules"><p><strong>Bounded active context.</strong> TP-KV preserves recent detail and compresses older history within an active token budget.</p><p><strong>A separate archive.</strong> CPU-side visual representations and search keys support retrieval after guidance. The archive is outside the active-context budget and can grow with video length.</p></div>
-      <p class="small-note">Evaluation uses timestamped queries in video streams. Clarification concerns the current query; prior dialogue is not a defined benchmark input.</p>
+      <p class="setting-intro">A frozen VLM receives a question at time <i>t</i><sub>i</sub>. It can use only the video observed so far.</p>
+      <div class="setting-rules"><p><strong>Bounded active context.</strong> Keep recent detail. Compress older context within a fixed token budget.</p><p><strong>A separate archive.</strong> Store searchable representations on the CPU. This archive sits outside the active token budget.</p></div>
     </section>
 
     <section id="method" class="wrap section" aria-labelledby="method-title">
-      <div class="section-heading"><div><p class="eyebrow">Core method</p><h2 id="method-title">Triggering and memory</h2></div><span class="small-note">Play the animation or select a step</span></div>
+      <div class="section-heading"><div><p class="eyebrow">Core method</p><h2 id="method-title">Triggering and memory</h2></div></div>
       <div class="method-tabs" role="tablist" aria-label="Method steps">
         <button id="method-tab-0" role="tab" aria-selected="true" aria-controls="method-panel" data-method="0"><span>01</span> Observe</button><span class="method-arrow" aria-hidden="true">→</span>
         <button id="method-tab-1" role="tab" aria-selected="false" aria-controls="method-panel" tabindex="-1" data-method="1"><span>02</span> Check</button><span class="method-arrow" aria-hidden="true">→</span>
@@ -105,84 +104,138 @@
 
     <section id="benchmark" class="benchmark-section" aria-labelledby="benchmark-title">
       <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow">StreamClarify-QA</p><h2 id="benchmark-title">Explore the questions in StreamClarify-QA</h2></div></div>
-        <p class="benchmark-lead">A diagnostic benchmark of <strong>1,837 questions across 355 videos</strong>, derived from StreamBench and OVO-Bench. Browse nine real examples across three diagnostic categories, with their reference annotations.</p>
+        <div class="section-heading"><div><p class="eyebrow">StreamClarify-QA</p><h2 id="benchmark-title">Questions over streaming video</h2></div></div>
+        <p class="benchmark-lead"><strong>1,837 timestamped questions across 355 videos.</strong> Each question uses the video observed so far. Play short excerpts from StreamBench and OVO-Bench below.</p>
         <div class="benchmark-bar" role="img" aria-label="995 standard, 302 ambiguous, and 540 unanswerable questions"><span class="standard" style="flex:995"></span><span class="ambiguous" style="flex:302"></span><span class="unanswerable" style="flex:540"></span></div>
         <!-- benchmark-examples:start -->
         <div class="benchmark-examples"><section class="benchmark-type" data-benchmark-group="standard" aria-labelledby="benchmark-heading-standard">
         <div class="type-heading"><h3 id="benchmark-heading-standard">Standard</h3><span>995</span></div>
         <p class="type-construction">Well-specified questions with a supported answer.</p>
         <div class="benchmark-switcher"><span class="benchmark-scene">Finding the red teapot</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Standard example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous standard example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next standard example">→</button></div></div>
-        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-standard-teapot" data-benchmark="standard-teapot" data-title="Finding the red teapot" aria-label="Finding the red teapot">
-          <figure><img src="assets/benchmark-standard-teapot.jpg" alt="A red teapot on the kitchen island, with the refrigerator behind it." width="448" height="336" loading="lazy"><figcaption>Frame 70s · question 80s · StreamBench</figcaption></figure>
-          <p class="annotation-question"><span>Question</span>Where is a red teapot?</p><p class="annotation-answer"><span>Reference annotation</span>There is a red teapot on the cabinet opposite the refrigerator.</p>
+        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-standard-teapot" data-benchmark="standard-teapot" data-title="Finding the red teapot" data-clip-start="64" data-clip-end="72" data-query="80" aria-label="Finding the red teapot">
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-standard-teapot.mp4" poster="assets/benchmark-standard-teapot.jpg" aria-label="A red teapot on the kitchen island, with the refrigerator behind it. Video excerpt from 01:04 to 01:12." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>01:04–01:12</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 01:20. Highlighted excerpt: 01:04 to 01:12."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:80.0000%;width:10.0000%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>01:20</span></div></div>
+            <figcaption>StreamBench · Question at 01:20</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>Where is a red teapot?</p><p class="annotation-answer"><span>Reference answer</span>There is a red teapot on the cabinet opposite the refrigerator.</p></div>
         </article>
-<article class="benchmark-sample" id="benchmark-sample-standard-eggplant" data-benchmark="standard-eggplant" data-title="An action at the sink" aria-label="An action at the sink" hidden>
-          <figure><img src="assets/benchmark-standard-eggplant.jpg" alt="A first-person kitchen view shows cut vegetables on a cutting board and in a bowl in the sink." width="448" height="336" loading="lazy"><figcaption>Frame 240s · question 244s · OVO-Bench</figcaption></figure>
-          <p class="annotation-question"><span>Question</span>What did I drop in the bowl in the sink?</p><ol class="benchmark-options"><li>meat</li><li>onion</li><li>eggplant</li><li>carrot</li></ol><p class="annotation-answer"><span>Reference annotation</span>eggplant</p>
+<article class="benchmark-sample" id="benchmark-sample-standard-eggplant" data-benchmark="standard-eggplant" data-title="An action at the sink" data-clip-start="234" data-clip-end="242" data-query="244" aria-label="An action at the sink" hidden>
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-standard-eggplant.mp4" poster="assets/benchmark-standard-eggplant.jpg" aria-label="A first-person kitchen view shows cut vegetables on a cutting board and in a bowl in the sink. Video excerpt from 03:54 to 04:02." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>03:54–04:02</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 04:04. Highlighted excerpt: 03:54 to 04:02."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:95.9016%;width:3.2787%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>04:04</span></div></div>
+            <figcaption>OVO-Bench · Question at 04:04</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>What did I drop in the bowl in the sink?</p><ol class="benchmark-options"><li>meat</li><li>onion</li><li>eggplant</li><li>carrot</li></ol><p class="annotation-answer"><span>Reference answer</span>eggplant</p></div>
         </article>
-<article class="benchmark-sample" id="benchmark-sample-standard" data-benchmark="standard" data-title="A drill on the windowsill" aria-label="A drill on the windowsill" hidden>
-          <figure><img src="assets/benchmark-standard.jpg" alt="A power drill is visibly resting on the windowsill." width="448" height="336" loading="lazy"><figcaption>Frame 15s · question 15s · StreamBench</figcaption></figure>
-          <p class="annotation-question"><span>Question</span>I need to use a drill to make holes in the wooden strips. Where can I find such a tool?</p><p class="annotation-answer"><span>Reference annotation</span>There seems to be a drill on the windowsill to your right that you can use.</p>
+<article class="benchmark-sample" id="benchmark-sample-standard" data-benchmark="standard" data-title="A drill on the windowsill" data-clip-start="7" data-clip-end="15" data-query="15" aria-label="A drill on the windowsill" hidden>
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-standard.mp4" poster="assets/benchmark-standard.jpg" aria-label="A power drill is visibly resting on the windowsill. Video excerpt from 00:07 to 00:15." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:07–00:15</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:15. Highlighted excerpt: 00:07 to 00:15."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:46.6667%;width:53.3333%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:15</span></div></div>
+            <figcaption>StreamBench · Question at 00:15</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>I need to use a drill to make holes in the wooden strips. Where can I find such a tool?</p><p class="annotation-answer"><span>Reference answer</span>There seems to be a drill on the windowsill to your right that you can use.</p></div>
         </article></div>
       </section>
 <section class="benchmark-type" data-benchmark-group="ambiguous" aria-labelledby="benchmark-heading-ambiguous">
-        <div class="type-heading"><h3 id="benchmark-heading-ambiguous">Referential ambiguity</h3><span>302</span></div>
+        <div class="type-heading"><h3 id="benchmark-heading-ambiguous">Ambiguous</h3><span>302</span></div>
         <p class="type-construction">Questions with an unclear intended referent.</p>
-        <div class="benchmark-switcher"><span class="benchmark-scene">Which object is “this”?</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Referential ambiguity example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous referential ambiguity example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next referential ambiguity example">→</button></div></div>
-        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-ambiguous" data-benchmark="ambiguous" data-title="Which object is “this”?" aria-label="Which object is “this”?">
-          <figure><img src="assets/benchmark-ambiguous.jpg" alt="A red drill, a hammer, wooden framing and the wearer&#x27;s sweatshirt are visible." width="448" height="336" loading="lazy"><figcaption>Frame 20s · question 20s · StreamBench</figcaption></figure>
-          <p class="annotation-source"><span>Source question</span>What color is the electric drill I&#x27;m holding?</p><p class="annotation-question"><span>Question</span>What color is this?</p><p class="annotation-answer"><span>Reference annotation</span>The electric drill you&#x27;re holding is likely black and red.</p><p class="annotation-meaning">A red drill and a grey sweatshirt are both visible, but “this” does not specify the object. The source question identifies the drill.</p>
+        <div class="benchmark-switcher"><span class="benchmark-scene">Which object is “this”?</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Ambiguous example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous ambiguous example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next ambiguous example">→</button></div></div>
+        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-ambiguous" data-benchmark="ambiguous" data-title="Which object is “this”?" data-clip-start="12" data-clip-end="20" data-query="20" aria-label="Which object is “this”?">
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous.mp4" poster="assets/benchmark-ambiguous.jpg" aria-label="A red drill, a hammer, wooden framing and the wearer&#x27;s sweatshirt are visible. Video excerpt from 00:12 to 00:20." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:12–00:20</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:20. Highlighted excerpt: 00:12 to 00:20."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:60.0000%;width:40.0000%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:20</span></div></div>
+            <figcaption>StreamBench · Question at 00:20</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>What color is this?</p><p class="annotation-answer"><span>Reference answer</span>The electric drill you&#x27;re holding is likely black and red.</p><p class="annotation-meaning">“This” could refer to the drill or the sweatshirt.</p><details class="benchmark-reference"><summary>Source question</summary><p class="annotation-source">What color is the electric drill I&#x27;m holding?</p></details></div>
         </article>
-<article class="benchmark-sample" id="benchmark-sample-ambiguous-apron" data-benchmark="ambiguous-apron" data-title="Remembering an item of clothing" aria-label="Remembering an item of clothing" hidden>
-          <figure><img src="assets/benchmark-ambiguous-apron.jpg" alt="Two women at a cooking counter; the short-haired woman is wearing a green apron." width="448" height="336" loading="lazy"><figcaption>Frame 93s · question 447s · StreamBench</figcaption></figure>
-          <p class="annotation-source"><span>Source question</span>Do you remember if the short-haired woman in the video was wearing an apron?</p><p class="annotation-question"><span>Question</span>Do you remember if the short-haired woman in the video was wearing that?</p><p class="annotation-answer"><span>Reference annotation</span>Yes, The short-haired woman in the video is wearing a green apron.</p>
+<article class="benchmark-sample" id="benchmark-sample-ambiguous-apron" data-benchmark="ambiguous-apron" data-title="Remembering an item of clothing" data-clip-start="87" data-clip-end="95" data-query="447" aria-label="Remembering an item of clothing" hidden>
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous-apron.mp4" poster="assets/benchmark-ambiguous-apron.jpg" aria-label="Two women at a cooking counter; the short-haired woman is wearing a green apron. Video excerpt from 01:27 to 01:35." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>01:27–01:35</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 07:27. Highlighted excerpt: 01:27 to 01:35."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:19.4631%;width:1.7897%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>07:27</span></div></div>
+            <figcaption>StreamBench · Question at 07:27</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>Do you remember if the short-haired woman in the video was wearing that?</p><p class="annotation-answer"><span>Reference answer</span>Yes, The short-haired woman in the video is wearing a green apron.</p><details class="benchmark-reference"><summary>Source question</summary><p class="annotation-source">Do you remember if the short-haired woman in the video was wearing an apron?</p></details></div>
         </article>
-<article class="benchmark-sample" id="benchmark-sample-ambiguous-bed" data-benchmark="ambiguous-bed" data-title="Which item on the bed?" aria-label="Which item on the bed?" hidden>
-          <figure><img src="assets/benchmark-ambiguous-bed.jpg" alt="A bedroom with a blanket spread across the bed, pillows, curtains and glass doors." width="448" height="252" loading="lazy"><figcaption>Frame 156s · question 168s · OVO-Bench</figcaption></figure>
-          <p class="annotation-source"><span>Source question</span>What is the grey item on the bed?</p><p class="annotation-question"><span>Question</span>What is that on the bed?</p><ol class="benchmark-options"><li>A pillow</li><li>A cushion</li><li>A rug</li><li>A blanket</li></ol><p class="annotation-answer"><span>Reference annotation</span>A blanket</p>
+<article class="benchmark-sample" id="benchmark-sample-ambiguous-bed" data-benchmark="ambiguous-bed" data-title="Which item on the bed?" data-clip-start="150" data-clip-end="158" data-query="168" aria-label="Which item on the bed?" hidden>
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous-bed.mp4" poster="assets/benchmark-ambiguous-bed.jpg" aria-label="A bedroom with a blanket spread across the bed, pillows, curtains and glass doors. Video excerpt from 02:30 to 02:38." width="448" height="252" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>02:30–02:38</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 02:48. Highlighted excerpt: 02:30 to 02:38."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:89.2857%;width:4.7619%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>02:48</span></div></div>
+            <figcaption>OVO-Bench · Question at 02:48</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>What is that on the bed?</p><ol class="benchmark-options"><li>A pillow</li><li>A cushion</li><li>A rug</li><li>A blanket</li></ol><p class="annotation-answer"><span>Reference answer</span>A blanket</p><details class="benchmark-reference"><summary>Source question</summary><p class="annotation-source">What is the grey item on the bed?</p></details></div>
         </article></div>
       </section>
 <section class="benchmark-type" data-benchmark-group="evidence_absent" aria-labelledby="benchmark-heading-evidence_absent">
         <div class="type-heading"><h3 id="benchmark-heading-evidence_absent">Unanswerable</h3><span>540</span></div>
         <p class="type-construction">No supported substantive answer option.</p>
         <div class="benchmark-switcher"><span class="benchmark-scene">A missing color option</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Unanswerable example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous unanswerable example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next unanswerable example">→</button></div></div>
-        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-unanswerable" data-benchmark="unanswerable" data-title="A missing color option" aria-label="A missing color option">
-          <figure><img src="assets/benchmark-unanswerable.jpg" alt="The man is visibly wearing a black cap in the kitchen. Black is absent from the substantive answer options." width="448" height="252" loading="lazy"><figcaption>Frame 3s · question 16s · StreamBench</figcaption></figure>
-          <p class="annotation-question"><span>Question</span>What color is this man&#x27;s hat?</p><ol class="benchmark-options"><li>The hat is brown.</li><li>None of the above</li><li>The hat is blue.</li><li>The hat is red.</li></ol><p class="annotation-answer"><span>Reference annotation</span>None of the above</p><p class="annotation-meaning">The hat is visible, but its original color answer is removed from the choices. None of the offered color options is supported.</p>
+        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-unanswerable" data-benchmark="unanswerable" data-title="A missing color option" data-clip-start="0" data-clip-end="5" data-query="16" aria-label="A missing color option">
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable.mp4" poster="assets/benchmark-unanswerable.jpg" aria-label="The man is visibly wearing a black cap in the kitchen. Black is absent from the substantive answer options. Video excerpt from 00:00 to 00:05." width="448" height="252" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:00–00:05</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:16. Highlighted excerpt: 00:00 to 00:05."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:0.0000%;width:31.2500%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:16</span></div></div>
+            <figcaption>StreamBench · Question at 00:16</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>What color is this man&#x27;s hat?</p><ol class="benchmark-options"><li>The hat is brown.</li><li>None of the above</li><li>The hat is blue.</li><li>The hat is red.</li></ol><p class="annotation-answer"><span>Reference answer</span>None of the above</p><p class="annotation-meaning">The hat is black. Black is missing from the offered choices.</p></div>
         </article>
-<article class="benchmark-sample" id="benchmark-sample-unanswerable-device" data-benchmark="unanswerable-device" data-title="A missing device option" aria-label="A missing device option" hidden>
-          <figure><img src="assets/benchmark-unanswerable-device.jpg" alt="A person holds a black massage gun with a round head while connecting an adapter at a wall outlet." width="448" height="336" loading="lazy"><figcaption>Frame 6s · question 25s · StreamBench</figcaption></figure>
-          <p class="annotation-question"><span>Question</span>What did I just plug into the outlet to charge?</p><ol class="benchmark-options"><li>A wireless phone charger</li><li>A portable power bank</li><li>A handheld vacuum cleaner</li><li>None of the above</li></ol><p class="annotation-answer"><span>Reference annotation</span>None of the above</p><p class="annotation-meaning">The source answer identifies a black massage gun. That device is absent from the offered choices: a phone charger, a power bank and a vacuum cleaner.</p>
+<article class="benchmark-sample" id="benchmark-sample-unanswerable-device" data-benchmark="unanswerable-device" data-title="A missing device option" data-clip-start="0" data-clip-end="8" data-query="25" aria-label="A missing device option" hidden>
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable-device.mp4" poster="assets/benchmark-unanswerable-device.jpg" aria-label="A person holds a black massage gun with a round head while connecting an adapter at a wall outlet. Video excerpt from 00:00 to 00:08." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:00–00:08</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:25. Highlighted excerpt: 00:00 to 00:08."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:0.0000%;width:32.0000%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:25</span></div></div>
+            <figcaption>StreamBench · Question at 00:25</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>What did I just plug into the outlet to charge?</p><ol class="benchmark-options"><li>A wireless phone charger</li><li>A portable power bank</li><li>A handheld vacuum cleaner</li><li>None of the above</li></ol><p class="annotation-answer"><span>Reference answer</span>None of the above</p><p class="annotation-meaning">The source answer is a massage gun, which is missing from the choices.</p></div>
         </article>
-<article class="benchmark-sample" id="benchmark-sample-unanswerable-oil" data-benchmark="unanswerable-oil" data-title="An uncertain past action" aria-label="An uncertain past action" hidden>
-          <figure><img src="assets/benchmark-unanswerable-oil.jpg" alt="A first-person view of a kitchen counter with food preparation and several bottles beside the stove." width="448" height="336" loading="lazy"><figcaption>Frame 359s · question 359s · OVO-Bench</figcaption></figure>
-          <p class="annotation-question"><span>Question</span>Did I close the bottle of oil?</p><ol class="benchmark-options"><li>No, I left it open</li><li>Unable to answer</li><li>The video doesn&#x27;t show this</li></ol><p class="annotation-answer"><span>Reference annotation</span>Unable to answer</p><p class="annotation-meaning">This native HLD question asks whether a particular past action occurred. OVO-Bench labels it “Unable to answer”; the illustrated still alone cannot establish absence across the observed video.</p>
+<article class="benchmark-sample" id="benchmark-sample-unanswerable-oil" data-benchmark="unanswerable-oil" data-title="An uncertain past action" data-clip-start="351" data-clip-end="359" data-query="359" aria-label="An uncertain past action" hidden>
+          <figure>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable-oil.mp4" poster="assets/benchmark-unanswerable-oil.jpg" aria-label="A first-person view of a kitchen counter with food preparation and several bottles beside the stove. Video excerpt from 05:51 to 05:59." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>05:51–05:59</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 05:59. Highlighted excerpt: 05:51 to 05:59."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:97.7716%;width:2.2284%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>05:59</span></div></div>
+            <figcaption>OVO-Bench · Question at 05:59</figcaption>
+          </figure>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>Did I close the bottle of oil?</p><ol class="benchmark-options"><li>No, I left it open</li><li>Unable to answer</li><li>The video doesn&#x27;t show this</li></ol><p class="annotation-answer"><span>Reference answer</span>Unable to answer</p><p class="annotation-meaning">OVO-Bench labels this question “Unable to answer”. The excerpt does not establish what happened throughout the prefix.</p></div>
         </article></div>
       </section></div>
         <!-- benchmark-examples:end -->
-        <p class="benchmark-example-note">These are dataset questions and reference annotations, not model predictions. The frames illustrate the observed prefix; they are not the model’s full video input.</p>
+        <p class="benchmark-example-note">Short excerpts from the observed video prefix. Answers are dataset reference annotations, not model predictions.</p>
         <details class="benchmark-details"><summary>How the dataset is constructed</summary>
         <div class="benchmark-pipeline" aria-label="Benchmark construction overview"><div><span class="pipeline-index">01</span><strong>Source video + timed questions</strong><p>260 StreamBench videos<br> 95 OVO-Bench videos</p></div><span class="pipeline-arrow" aria-hidden="true">→</span><div><span class="pipeline-index">02</span><strong>Timestamp-aligned captions</strong><p>Dense video descriptions guide<br> query transformation and checking.</p></div><span class="pipeline-arrow" aria-hidden="true">→</span><div><span class="pipeline-index">03</span><strong>Three question types</strong><p>Retain, rewrite, or construct<br> questions.</p></div></div>
           <div class="data-table-wrap"><table class="data-table"><caption>Final benchmark composition</caption><thead><tr><th scope="col">Source</th><th scope="col">Videos</th><th scope="col">Standard</th><th scope="col">Ambiguous</th><th scope="col">Unanswerable</th><th scope="col">Total QA</th></tr></thead><tbody><tr><th scope="row">StreamBench</th><td>260</td><td>913</td><td>254</td><td>389</td><td>1,556</td></tr><tr><th scope="row">OVO-Bench</th><td>95</td><td>82</td><td>48</td><td>151</td><td>281</td></tr></tbody></table></div>
-          <div class="construction-notes"><p><strong>Source selection and captions.</strong> OVO-Bench videos are selected for containing HLD questions; all question types in those videos are considered. Questions less than 5 seconds after the previous query are filtered. MiniCPM-V 4.5 captions use 2 FPS, 448-pixel inputs and overlapping 6-second windows with a 3-second stride. The caption prompt includes source questions, but not their answers.</p><p><strong>Ambiguity review.</strong> Specific noun phrases are replaced by pronouns when multiple referents are plausible. All 404 candidates receive human review; 302 are retained.</p><p><strong>Unanswerable checks.</strong> For 389 StreamBench questions, distractors are checked against the caption prefix; the original correct answer is then removed from the choices and “None of the above” is added. All 389 are then screened against raw causal video; only the 7 flagged cases receive human review, which retains their labels. The 151 native OVO-Bench HLD questions are kept unchanged and are outside that audit.</p></div>
+          <div class="construction-notes"><p><strong>Source selection and captions.</strong> OVO videos contain native HLD questions. Queries less than 5 seconds apart are filtered. MiniCPM-V 4.5 captions use 2 FPS, 448-pixel inputs, 6-second windows and a 3-second stride. Source questions are included; answers are withheld.</p><p><strong>Ambiguity review.</strong> Replace specific noun phrases with pronouns. Human review retains 302 of 404 candidates with plausible alternative referents.</p><p><strong>Unanswerable checks.</strong> For 389 StreamBench questions, check distractors against caption prefixes, remove the correct option and add “None of the above”. Screen all raw video prefixes; review 7 flagged cases. Keep the 151 native OVO-Bench HLD labels unchanged.</p></div>
           <p class="small-note"><a href="data/benchmark-examples.json">Example annotations and frame provenance</a>.</p>
         </details>
       </div>
     </section>
 
     <section id="experiments" class="wrap section experiment-section" aria-labelledby="experiments-title">
-      <div class="section-heading"><div><p class="eyebrow">Experimental setup</p><h2 id="experiments-title">Separate the trigger, memory, and interaction studies</h2></div></div>
-      <p class="experiment-lead">The paper evaluates frozen 8B backbones—LLaVA-OV-1.5, InternVL-3.5, and Qwen3-VL—without task-specific fine-tuning. StreamClarify’s default active-context budget is 10K tokens, with a 20-second recent window and 0.25 compression ratio; retrieval selects 16 clips when enabled. The matched-budget study uses 6K instead.</p>
-      <p class="small-note">Reported numbers come from the archived paper runs. A later code audit found three out-of-order queries in one video; scheduling is corrected in the code release, and aggregate results have not been rerun.</p>
+      <div class="section-heading"><div><p class="eyebrow">Experimental setup</p><h2 id="experiments-title">What each experiment measures</h2></div></div>
+      <p class="experiment-lead">Three frozen 8B backbones: LLaVA-OV-1.5, InternVL-3.5, and Qwen3-VL. No task-specific fine-tuning.</p><p class="experiment-parameters">10K active tokens · 20 s recent window · 0.25 compression ratio · top-16 retrieval</p>
+      <p class="small-note">Archived paper results. Three queries in one video included later frames in their saved context. The release fixes query order; aggregate scores have not been rerun.</p>
       <div class="experiment-map" role="table" aria-label="Four experimental regimes">
         <div class="experiment-map-head" role="row"><span role="columnheader">Study</span><span role="columnheader">Questions and comparison</span><span role="columnheader">What is measured</span></div>
-        <div role="row"><a href="#result-tab-trigger" role="cell"><span>01</span>Trigger selection</a><p role="cell">All 1,837 questions pooled across both sources; three backbones. Random and entropy triggers use comparable selection rates. Re-answering after a trigger uses <strong>oracle guidance</strong>.</p><p role="cell">Precision and recall of <strong>initial-answer errors</strong>; downstream answer accuracy and added latency.</p></div>
-        <div role="row"><a href="#result-tab-memory" role="cell"><span>02</span>Matched 6K context</a><p role="cell">Qwen3-VL, each source evaluated separately, <strong>clarification disabled</strong>. A common 6K active-context ceiling; each method retains its memory design and any separate CPU storage.</p><p role="cell">Answer accuracy under a shared active-context ceiling. This does not establish verified recovery of evicted evidence.</p></div>
-        <div role="row"><a href="#result-tab-main" role="cell"><span>03</span>Standard configuration</a><p role="cell">Each source and backbone evaluated separately, <strong>clarification disabled</strong>. Methods use their standard memory configurations. The result view below shows Qwen3-VL.</p><p role="cell">Per-type, Micro, and Macro accuracy; time to first token and video-processing FPS.</p></div>
-        <div role="row"><a href="#result-tab-clarification" role="cell"><span>04</span>Generated-question PoC</a><p role="cell">302 ambiguous questions, Qwen3-VL. An <strong>evaluation-only referent-aware gate</strong> accepts a generated follow-up before a fixed simulated reply is supplied; rejection falls back to direct retrieval. The reused entropy threshold selects 162 questions.</p><p role="cell">Answer accuracy, corrections, and harms in a controlled simulation. No live human study or natural multi-turn conversation.</p></div>
+        <div role="row"><a href="#result-tab-trigger" role="cell"><span>01</span>Trigger selection</a><p role="cell">1,837 questions · three backbones. Random and entropy selection use comparable rates. Selected queries receive <strong>oracle guidance</strong>.</p><p role="cell"><strong>Initial-error precision and recall.</strong> Answer accuracy and latency.</p></div>
+        <div role="row"><a href="#result-tab-memory" role="cell"><span>02</span>Matched 6K context</a><p role="cell">Qwen3-VL · each source separately · <strong>clarification off</strong>. Methods share a 6K active-context limit and retain their own memory designs.</p><p role="cell">Accuracy under a shared active-context limit. CPU storage is separate.</p></div>
+        <div role="row"><a href="#result-tab-main" role="cell"><span>03</span>Standard configuration</a><p role="cell">Each source and backbone separately · <strong>clarification off</strong>. Each method uses its standard memory configuration.</p><p role="cell">Accuracy, time to first token, and processing FPS. Charts below show Qwen3-VL.</p></div>
+        <div role="row"><a href="#result-tab-clarification" role="cell"><span>04</span>Generated-question PoC</a><p role="cell">302 ambiguous questions · Qwen3-VL. An <strong>evaluation-only referent-aware gate</strong> checks follow-ups. Accepted questions receive a fixed reply; rejected questions use direct retrieval.</p><p role="cell">Simulated accuracy, corrections, and harms. Entropy selection uses 162 questions.</p></div>
       </div>
-      <details class="evaluation-details"><summary>Reading the metrics and comparison boundaries</summary><p>Answer correctness is judged by Qwen3-14B with dense offline captions as evaluation context. Those captions are not additional video input to the evaluated streaming model. <strong>Micro</strong> averages over questions; <strong>Macro</strong> averages the three question-type accuracies. Reported paired 95% confidence intervals resample whole videos.</p><p>Trigger precision is the fraction of selected questions whose initial answers were incorrect; recall is the fraction of initial errors selected. The trigger does not diagnose ambiguity or predict whether clarification will help. No-clarification and clarification-enabled latency are reported separately. The PoC reports model/retrieval time separately from the evaluation-only gate; these timings exclude real-user response delay.</p><p>The 6K ceiling constrains active context, not total storage. StreamChat’s limit applies to its query-time visual input; the methods retain different memory mechanisms. The CPU archive is outside StreamClarify’s active token budget.</p></details>
+      <details class="evaluation-details"><summary>Metrics and evaluation protocol</summary><dl class="metric-definitions">
+<div><dt>Answer scoring</dt><dd>Qwen3-14B judges answers using offline captions. These captions are judge inputs only.</dd></div>
+<div><dt>Micro / Macro</dt><dd>Micro averages questions. Macro averages the three question types.</dd></div>
+<div><dt>Trigger precision</dt><dd>How many selected answers were initially wrong?</dd></div>
+<div><dt>Trigger recall</dt><dd>How many initial errors were selected?</dd></div>
+<div><dt>Uncertainty score</dt><dd>Ranks initial errors. It does not identify their cause or predict clarification benefit.</dd></div>
+<div><dt>Confidence intervals</dt><dd>Paired 95% intervals resample whole videos.</dd></div>
+<div><dt>Latency</dt><dd>No-clarification and clarification timings are separate. Gate time is reported separately; simulated replies exclude real-user delay.</dd></div>
+<div><dt>6K context</dt><dd>Counts active visual context, not total storage. Methods retain different memory mechanisms; CPU storage is separate.</dd></div>
+</dl></details>
     </section>
 
     <section id="results" class="wrap section" aria-labelledby="results-title">
@@ -192,8 +245,7 @@
         <div class="chart-heading"><div><h3 id="chart-title">Selecting initially incorrect answers</h3><p class="small-note" id="chart-subtitle">Trigger precision · 1,837 questions · comparable selection rates</p></div><label id="backbone-control">Backbone <select id="backbone-select"><option value="0">Qwen3-VL</option><option value="1">LLaVA-OV-1.5</option><option value="2">InternVL-3.5</option></select></label><label id="dataset-control" hidden>Dataset <select id="dataset-select"><option value="0">StreamBench</option><option value="1">OVO-Bench</option></select></label></div>
         <div id="results-chart" class="results-chart" aria-label="Experimental accuracy results"></div>
         <p id="core-result-note" class="core-result-note"></p>
-        <div id="clarification-result-note" class="result-insight" hidden><p><strong>34 answers corrected. 9 made worse.</strong><span>In the proof-of-concept simulation, the entropy-gated condition improves accuracy by <strong>8.3 percentage points</strong> (paired 95% CI: +4.2 to +12.5).</span></p><p class="small-note">The entropy trigger selects 162 of 302 questions. Direct retrieval runs on all questions. Selection and guidance differ across conditions.</p></div>
-        <p id="main-result-note" class="small-note" hidden>These are the paper’s no-clarification results under each method’s standard configuration. They use different memory designs and are separate from the generated-question experiment.</p>
+        <div id="clarification-result-note" class="result-insight" hidden><p><strong>34 answers corrected. 9 made worse.</strong><span>Entropy-gated gain: <strong>8.3 points</strong>. Paired 95% CI: +4.2 to +12.5.</span></p><p class="small-note">Entropy: 162 of 302 selected. Direct retrieval: all questions. These conditions differ in selection and guidance.</p></div>
         <details class="result-details"><summary>Experiment details and full numbers</summary><div id="results-details-content"></div></details>
       </div>
 
@@ -201,7 +253,7 @@
 
     <section id="examples" class="wrap examples-section" aria-labelledby="examples-title">
       <div class="section-heading"><div><p class="eyebrow">Additional study · Qwen3-VL</p><h2 id="examples-title">Generated questions: a proof of concept</h2></div></div>
-      <p class="examples-intro">Five saved interactions from the generated-question study: corrections, a case where direct retrieval also succeeds, and a rejected follow-up. Replies are simulated; the full evaluation protocol is described above.</p>
+      <p class="examples-intro">Five recorded cases: corrections, retrieval success, and a rejected follow-up. Replies are simulated.</p>
       <div id="case-tabs" class="case-tabs" role="tablist" aria-label="Recorded examples"></div>
       <p id="case-summary" class="case-summary"></p>
       <div id="example-panel" class="example-panel" role="tabpanel" tabindex="0">
@@ -218,8 +270,8 @@
           <div class="step-controls"><button id="replay" type="button" class="plain-button replay" aria-label="Replay the interaction">Replay dialogue</button><button id="previous-step" type="button" class="plain-button" aria-label="Previous interaction step">←</button><span id="step-progress" class="step-progress" aria-label="Interaction progress"></span><button id="next-step" type="button" class="plain-button next-step">Next step →</button></div>
         </div>
       </div>
-      <p class="example-caption" id="example-caption">Recorded model outputs with simulated replies; not live inference.</p>
-      <details class="evidence-details"><summary>Inspect clarification-branch retrieval and the protocol</summary><div id="evidence-content"></div><p class="small-note">The experiment uses an evaluation-only validity gate with access to the annotated referent. A valid question receives a fixed referent-only reply; an invalid question falls back to direct retrieval. Retrieved frames are search outputs, not independently verified proof for the answer.</p></details>
+      <p class="example-caption" id="example-caption">Recorded model outputs and simulated replies.</p>
+      <details class="evidence-details"><summary>Retrieved frames and simulation protocol</summary><div id="evidence-content"></div><p class="small-note">The gate knows the annotated referent. It accepts a follow-up or falls back to direct retrieval. Accepted questions receive a fixed referent-only reply. Retrieved frames are candidates, not verified answer evidence.</p></details>
       <noscript><p>Enable JavaScript to explore the recorded examples and interactive figures.</p></noscript>
     </section>
 

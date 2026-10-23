@@ -44,12 +44,13 @@ class BenchmarkExampleParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == 'article' and 'data-benchmark' in attrs:
-            self.current = {'id': attrs['data-benchmark'], 'options': []}
+            self.current = {'id': attrs['data-benchmark'], 'options': [], 'clipStartSeconds': float(attrs['data-clip-start']), 'clipEndSeconds': float(attrs['data-clip-end']), 'queryTimeSeconds': float(attrs['data-query'])}
             self.examples.append(self.current)
         if self.current is None:
             return
-        if tag == 'img':
-            self.current['image'] = attrs.get('src')
+        if tag == 'video':
+            self.current['image'] = attrs.get('poster')
+            self.current['video'] = attrs.get('src')
         classes = attrs.get('class', '').split()
         if tag == 'ol' and 'benchmark-options' in classes:
             self.in_options = True
@@ -114,7 +115,14 @@ def main():
     visible_by_id = {e['id']: e for e in visible_benchmark.examples}
     for example in benchmark_examples:
         label = f'Benchmark {example["id"]}'
-        references.append(example['image'])
+        references.extend([example['image'], example['video']])
+        require(0 <= example['clipStartSeconds'] < example['clipEndSeconds'] <= example['queryTimeSeconds'], f'{label}: future or invalid video excerpt')
+        require(example['clipStartSeconds'] <= example['frameTimeSeconds'] <= example['clipEndSeconds'], f'{label}: poster outside excerpt')
+        video_path = (DIST / example['video']).resolve()
+        valid_video = video_path.is_relative_to(DIST.resolve()) and video_path.is_file()
+        require(valid_video, f'{label}: missing or invalid video')
+        if valid_video:
+            require(hashlib.sha256(video_path.read_bytes()).hexdigest() == example['provenance']['videoSha256'], f'{label}: video hash changed')
         require(0 <= example['frameTimeSeconds'] <= example['queryTimeSeconds'], f'{label}: future or invalid frame')
         require(example['provenance']['frameTimeSeconds'] == example['frameTimeSeconds'], f'{label}: inconsistent frame provenance')
         image_path = (DIST / example['image']).resolve()
@@ -123,15 +131,14 @@ def main():
         if valid_image:
             require(hashlib.sha256(image_path.read_bytes()).hexdigest() == example['provenance']['imageSha256'], f'{label}: image hash changed')
         shown = visible_by_id.get(example['id'], {})
-        for field in ('question', 'referenceAnswer', 'options', 'image', 'originalQuestion'):
+        for field in ('question', 'referenceAnswer', 'options', 'image', 'video', 'clipStartSeconds', 'clipEndSeconds', 'queryTimeSeconds', 'originalQuestion'):
             expected = example.get(field)
             if field == 'originalQuestion' and expected:
                 expected = expected.split(' Options:', 1)[0]
             require(shown.get(field) == expected, f'{label}: visible {field} differs from annotation JSON')
-        caption = re.fullmatch(r'Frame ([0-9.]+)s\s*·\s*question ([0-9.]+)s\s*·\s*(.+)', shown.get('caption', ''))
-        require(caption is not None, f'{label}: missing frame/query times in visible caption')
-        if caption:
-            require(float(caption[1]) == example['frameTimeSeconds'] and float(caption[2]) == example['queryTimeSeconds'] and caption[3] == example['dataset'], f'{label}: visible frame/query time or dataset differs from annotation JSON')
+        query = example['queryTimeSeconds']
+        time = f'{int(query // 60):02d}:{int(query % 60):02d}'
+        require(shown.get('caption') == f'{example["dataset"]} · Question at {time}', f'{label}: visible query time or dataset differs from annotation JSON')
     for c in cases:
         references.extend([c['video'], c['poster']])
         require(0 <= c['clipStart'] < c['clipEnd'], f'{c["id"]}: invalid video interval')

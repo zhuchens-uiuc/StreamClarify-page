@@ -46,7 +46,7 @@
         <section class="ma-stage ma-stage-observe" data-stage-panel="0" aria-label="Observe">
           <p class="ma-process-title">Each incoming frame updates both memory paths.</p>
           <p class="ma-process-copy">Older active tokens are temporally subsampled. The independent archive keeps searchable visual representations.</p>
-          <p class="ma-process-note">Images stand in for visual representations. Memory compression is schematic, not measured for this 20-second example.</p>
+          <p class="ma-process-note">Images represent stored features; compression is schematic.</p>
         </section>
         <section class="ma-stage ma-stage-check" data-stage-panel="1" aria-label="Check" hidden>
           <div class="ma-probe"><span class="ma-probe-input">Query + active context</span><span class="ma-down-arrow" aria-hidden="true">↓</span><span class="ma-probe-title">Would the answer rely on video evidence<br>rather than general knowledge?</span><span class="ma-yes-no">Yes / No</span><span class="ma-down-arrow" aria-hidden="true">↓</span><span class="ma-entropy">Uncertainty <i>H</i>(Yes, No) · fixed threshold τ</span></div>
@@ -56,7 +56,7 @@
         <section class="ma-stage ma-stage-clarify" data-stage-panel="2" aria-label="User guidance" hidden>
           <div class="ma-dialogue-line ma-followup"><span>Above the entropy threshold</span><p>Suspend the answer and request clarification.</p></div>
           <div class="ma-dialogue-line ma-reply"><span>Input to the framework</span><p>Clarified user guidance <i>R</i><sub>i</sub></p></div>
-          <p class="ma-process-note ma-gate-note">User guidance is an input to the core framework. Question generation is evaluated separately as a proof of concept.</p>
+          <p class="ma-process-note ma-gate-note">Question generation is a separate proof of concept.</p>
         </section>
         <section class="ma-stage ma-stage-reanswer" data-stage-panel="3" aria-label="Re-answer" hidden>
           <div class="ma-retrieval-title"><span class="ma-retrieval-path" aria-hidden="true">↓</span><span>Guidance → archive retrieval → prefill</span></div>
@@ -65,7 +65,7 @@
         </section>
       </div></div></div>
       <div class="ma-controls"><button type="button" class="plain-button" data-action="play">Play animation</button><button type="button" class="plain-button" data-action="restart">Restart</button><span class="ma-control-stage" aria-hidden="true">01 / 04</span></div>
-      <p class="ma-caption">Conceptual animation of the core framework. Memory layout and timing are schematic; the video frames do not establish memory compression or recovery.</p>
+      <p class="ma-caption">Schematic memory layout and timing.</p>
       <p class="ma-accessible-status" role="status" aria-live="polite"></p>`;
 
     const panels = Array.from(root.querySelectorAll('[data-stage-panel]'));

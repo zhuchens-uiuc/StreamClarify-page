@@ -28,3 +28,5 @@ In repository **Settings → Pages → Build and deployment**, select **GitHub A
 The project URL is `https://zhuchens-uiuc.github.io/StreamClarify-page/`.
 
 Website code is licensed under Apache-2.0. Paper figures and benchmark media retain their respective rights and source attribution.
+
+The University of Illinois Urbana-Champaign wordmark is provided by the [official university brand resources](https://web.brand.illinois.edu/logos/). University marks retain their respective rights.

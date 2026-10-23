@@ -32,6 +32,10 @@ p{margin-bottom:18px}
 .paper-title{font-family:var(--sans);font-size:25px;line-height:1.4;letter-spacing:-.012em;margin-bottom:24px}
 .authors{display:flex;justify-content:center;gap:28px;font-size:17px;margin-bottom:24px;flex-wrap:wrap}
 .authors span{color:var(--ink)}
+.hero .authors{margin-bottom:0}
+.affiliation{display:flex;justify-content:center;padding:65px 0}
+.affiliation a{display:block;max-width:100%}
+.affiliation img{display:block;width:248px;max-width:100%;height:auto}
 .paper-links{display:flex;justify-content:center;align-items:center;column-gap:24px;row-gap:8px;flex-wrap:wrap;font-size:16px}
 .hero-summary{font-size:18px;line-height:1.65;color:#4c4c47;max-width:780px;margin:28px auto 0}
 .section{padding-top:68px;padding-bottom:8px}

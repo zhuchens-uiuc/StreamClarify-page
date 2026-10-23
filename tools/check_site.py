@@ -116,6 +116,8 @@ def main():
     for example in benchmark_examples:
         label = f'Benchmark {example["id"]}'
         references.extend([example['image'], example['video']])
+        require(example['provenance'].get('sourceKind') == 'original dataset video' and example['provenance'].get('sourceFps', 0) > 2, f'{label}: presentation must use original video at its native frame rate')
+        require(example['provenance']['posterSourceTimeSeconds'] <= example['frameTimeSeconds'] + 1e-6, f'{label}: poster exceeds its labelled time')
         require(0 <= example['clipStartSeconds'] < example['clipEndSeconds'] <= example['queryTimeSeconds'], f'{label}: future or invalid video excerpt')
         require(example['clipStartSeconds'] <= example['frameTimeSeconds'] <= example['clipEndSeconds'], f'{label}: poster outside excerpt')
         video_path = (DIST / example['video']).resolve()
@@ -141,6 +143,9 @@ def main():
         require(shown.get('caption') == f'{example["dataset"]} · Question at {time}', f'{label}: visible query time or dataset differs from annotation JSON')
     for c in cases:
         references.extend([c['video'], c['poster']])
+        presentation = c.get('presentation', {})
+        require(presentation.get('sourceKind') == 'original dataset video' and presentation.get('sourceFps', 0) > 2, f'{c["id"]}: missing original-video presentation provenance')
+        require(presentation.get('posterSourceTimeSeconds', float('inf')) <= c['posterTime'] + 1e-6, f'{c["id"]}: presentation poster exceeds its labelled time')
         require(0 <= c['clipStart'] < c['clipEnd'], f'{c["id"]}: invalid video interval')
         require(c['clipEnd'] <= c['queryTime'], f'{c["id"]}: future video content')
         require(c['posterTime'] <= c['queryTime'], f'{c["id"]}: future poster')
@@ -163,6 +168,14 @@ def main():
             require(path.is_file(), f'Missing local file: {reference}')
         elif parts.fragment:
             require(parts.fragment in page.ids, f'Missing anchor: {reference}')
+    manifest = json.loads((DIST / 'data/assets-manifest.json').read_text())
+    require(manifest['casesSha256'] == hashlib.sha256((DIST / 'data/cases.json').read_bytes()).hexdigest(), 'Case media manifest is stale')
+    for asset in manifest['assets']:
+        path = (DIST / asset['file']).resolve()
+        valid = path.is_relative_to(DIST.resolve()) and path.is_file()
+        require(valid, f'Missing manifest asset: {asset["file"]}')
+        if valid:
+            require(hashlib.sha256(path.read_bytes()).hexdigest() == asset['sha256'], f'Manifest asset hash changed: {asset["file"]}')
     benchmark = results['benchmark']
     require(sum(c['count'] for c in benchmark['categories']) == benchmark['total_qa'] == 1837, 'Benchmark count mismatch')
     require(sum(d['video_count'] for d in benchmark['datasets']) == benchmark['total_videos'] == 355, 'Video count mismatch')

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="research-layout.css?v=e4f04a317e">
   <script src="method-animation.js" defer></script>
   <script src="benchmark-gallery.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=20061f9653" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -123,7 +123,7 @@
         <div class="benchmark-switcher"><span class="benchmark-scene">Finding the red teapot</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Standard example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous standard example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next standard example">→</button></div></div>
         <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-standard-teapot" data-benchmark="standard-teapot" data-title="Finding the red teapot" data-clip-start="64" data-clip-end="72" data-query="80" aria-label="Finding the red teapot">
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-standard-teapot.mp4" poster="assets/benchmark-standard-teapot.jpg" aria-label="A red teapot on the kitchen island, with the refrigerator behind it. Video excerpt from 01:04 to 01:12." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-standard-teapot-original.mp4" poster="assets/benchmark-standard-teapot-original.jpg" aria-label="A red teapot on the kitchen island, with the refrigerator behind it. Video excerpt from 01:04 to 01:12." width="640" height="480" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>01:04–01:12</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 01:20. Highlighted excerpt: 01:04 to 01:12."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:80.0000%;width:10.0000%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>01:20</span></div></div>
             <figcaption>StreamBench · Question at 01:20</figcaption>
@@ -132,7 +132,7 @@
         </article>
 <article class="benchmark-sample" id="benchmark-sample-standard-eggplant" data-benchmark="standard-eggplant" data-title="An action at the sink" data-clip-start="234" data-clip-end="242" data-query="244" aria-label="An action at the sink" hidden>
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-standard-eggplant.mp4" poster="assets/benchmark-standard-eggplant.jpg" aria-label="A first-person kitchen view shows cut vegetables on a cutting board and in a bowl in the sink. Video excerpt from 03:54 to 04:02." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-standard-eggplant-original.mp4" poster="assets/benchmark-standard-eggplant-original.jpg" aria-label="A first-person kitchen view shows cut vegetables on a cutting board and in a bowl in the sink. Video excerpt from 03:54 to 04:02." width="960" height="720" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>03:54–04:02</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 04:04. Highlighted excerpt: 03:54 to 04:02."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:95.9016%;width:3.2787%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>04:04</span></div></div>
             <figcaption>OVO-Bench · Question at 04:04</figcaption>
@@ -141,7 +141,7 @@
         </article>
 <article class="benchmark-sample" id="benchmark-sample-standard" data-benchmark="standard" data-title="A drill on the windowsill" data-clip-start="7" data-clip-end="15" data-query="15" aria-label="A drill on the windowsill" hidden>
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-standard.mp4" poster="assets/benchmark-standard.jpg" aria-label="A power drill is visibly resting on the windowsill. Video excerpt from 00:07 to 00:15." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-standard-original.mp4" poster="assets/benchmark-standard-original.jpg" aria-label="A power drill is visibly resting on the windowsill. Video excerpt from 00:07 to 00:15." width="480" height="360" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:07–00:15</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:15. Highlighted excerpt: 00:07 to 00:15."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:46.6667%;width:53.3333%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:15</span></div></div>
             <figcaption>StreamBench · Question at 00:15</figcaption>
@@ -155,7 +155,7 @@
         <div class="benchmark-switcher"><span class="benchmark-scene">Which object is “this”?</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Ambiguous example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous ambiguous example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next ambiguous example">→</button></div></div>
         <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-ambiguous" data-benchmark="ambiguous" data-title="Which object is “this”?" data-clip-start="12" data-clip-end="20" data-query="20" aria-label="Which object is “this”?">
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous.mp4" poster="assets/benchmark-ambiguous.jpg" aria-label="A red drill, a hammer, wooden framing and the wearer&#x27;s sweatshirt are visible. Video excerpt from 00:12 to 00:20." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous-original.mp4" poster="assets/benchmark-ambiguous-original.jpg" aria-label="A red drill, a hammer, wooden framing and the wearer&#x27;s sweatshirt are visible. Video excerpt from 00:12 to 00:20." width="480" height="360" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:12–00:20</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:20. Highlighted excerpt: 00:12 to 00:20."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:60.0000%;width:40.0000%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:20</span></div></div>
             <figcaption>StreamBench · Question at 00:20</figcaption>
@@ -164,21 +164,21 @@
         </article>
 <article class="benchmark-sample" id="benchmark-sample-ambiguous-apron" data-benchmark="ambiguous-apron" data-title="Remembering an item of clothing" data-clip-start="87" data-clip-end="95" data-query="447" aria-label="Remembering an item of clothing" hidden>
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous-apron.mp4" poster="assets/benchmark-ambiguous-apron.jpg" aria-label="Two women at a cooking counter; the short-haired woman is wearing a green apron. Video excerpt from 01:27 to 01:35." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous-apron-original.mp4" poster="assets/benchmark-ambiguous-apron-original.jpg" aria-label="Two women at a cooking counter; the short-haired woman is wearing a green apron. Video excerpt from 01:27 to 01:35." width="320" height="240" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>01:27–01:35</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 07:27. Highlighted excerpt: 01:27 to 01:35."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:19.4631%;width:1.7897%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>07:27</span></div></div>
             <figcaption>StreamBench · Question at 07:27</figcaption>
           </figure>
           <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>Do you remember if the short-haired woman in the video was wearing that?</p><p class="annotation-answer"><span>Reference answer</span>Yes, The short-haired woman in the video is wearing a green apron.</p><details class="benchmark-reference"><summary>Source question</summary><p class="annotation-source">Do you remember if the short-haired woman in the video was wearing an apron?</p></details></div>
         </article>
-<article class="benchmark-sample" id="benchmark-sample-ambiguous-bed" data-benchmark="ambiguous-bed" data-title="Which item on the bed?" data-clip-start="150" data-clip-end="158" data-query="168" aria-label="Which item on the bed?" hidden>
+<article class="benchmark-sample" id="benchmark-sample-ambiguous-toy" data-benchmark="ambiguous-toy" data-title="Which item in the store?" data-clip-start="43" data-clip-end="51" data-query="51" aria-label="Which item in the store?" hidden>
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous-bed.mp4" poster="assets/benchmark-ambiguous-bed.jpg" aria-label="A bedroom with a blanket spread across the bed, pillows, curtains and glass doors. Video excerpt from 02:30 to 02:38." width="448" height="252" controls playsinline muted preload="none"></video></div>
-            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>02:30–02:38</span></div>
-            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 02:48. Highlighted excerpt: 02:30 to 02:38."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:89.2857%;width:4.7619%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>02:48</span></div></div>
-            <figcaption>OVO-Bench · Question at 02:48</figcaption>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-ambiguous-toy-original.mp4" poster="assets/benchmark-ambiguous-toy-original.jpg" aria-label="A first-person store view shows boxed products on display and a person holding a box. Video excerpt from 00:43 to 00:51." width="1280" height="720" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:43–00:51</span></div>
+            <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:51. Highlighted excerpt: 00:43 to 00:51."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:84.3137%;width:15.6863%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:51</span></div></div>
+            <figcaption>OVO-Bench · Question at 00:51</figcaption>
           </figure>
-          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>What is that on the bed?</p><ol class="benchmark-options"><li>A pillow</li><li>A cushion</li><li>A rug</li><li>A blanket</li></ol><p class="annotation-answer"><span>Reference answer</span>A blanket</p><details class="benchmark-reference"><summary>Source question</summary><p class="annotation-source">What is the grey item on the bed?</p></details></div>
+          <div class="benchmark-qa"><p class="annotation-question"><span>Question</span>Where did I put it?</p><ol class="benchmark-options"><li>On the floor</li><li>At the toy rack</li><li>In the shopping basket</li><li>On the shelf</li></ol><p class="annotation-answer"><span>Reference answer</span>At the toy rack</p><p class="annotation-meaning">“It” does not specify which item in the store is intended.</p><details class="benchmark-reference"><summary>Source question</summary><p class="annotation-source">Where did I put the alien toy box?</p></details></div>
         </article></div>
       </section>
 <section class="benchmark-type" data-benchmark-group="evidence_absent" aria-labelledby="benchmark-heading-evidence_absent">
@@ -187,7 +187,7 @@
         <div class="benchmark-switcher"><span class="benchmark-scene">A missing color option</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Unanswerable example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous unanswerable example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next unanswerable example">→</button></div></div>
         <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-unanswerable" data-benchmark="unanswerable" data-title="A missing color option" data-clip-start="0" data-clip-end="5" data-query="16" aria-label="A missing color option">
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable.mp4" poster="assets/benchmark-unanswerable.jpg" aria-label="The man is visibly wearing a black cap in the kitchen. Black is absent from the substantive answer options. Video excerpt from 00:00 to 00:05." width="448" height="252" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable-original.mp4" poster="assets/benchmark-unanswerable-original.jpg" aria-label="The man is visibly wearing a black cap in the kitchen. Black is absent from the substantive answer options. Video excerpt from 00:00 to 00:05." width="640" height="360" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:00–00:05</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:16. Highlighted excerpt: 00:00 to 00:05."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:0.0000%;width:31.2500%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:16</span></div></div>
             <figcaption>StreamBench · Question at 00:16</figcaption>
@@ -196,7 +196,7 @@
         </article>
 <article class="benchmark-sample" id="benchmark-sample-unanswerable-device" data-benchmark="unanswerable-device" data-title="A missing device option" data-clip-start="0" data-clip-end="8" data-query="25" aria-label="A missing device option" hidden>
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable-device.mp4" poster="assets/benchmark-unanswerable-device.jpg" aria-label="A person holds a black massage gun with a round head while connecting an adapter at a wall outlet. Video excerpt from 00:00 to 00:08." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable-device-original.mp4" poster="assets/benchmark-unanswerable-device-original.jpg" aria-label="A person holds a black massage gun with a round head while connecting an adapter at a wall outlet. Video excerpt from 00:00 to 00:08." width="480" height="360" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>00:00–00:08</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 00:25. Highlighted excerpt: 00:00 to 00:08."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:0.0000%;width:32.0000%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>00:25</span></div></div>
             <figcaption>StreamBench · Question at 00:25</figcaption>
@@ -205,7 +205,7 @@
         </article>
 <article class="benchmark-sample" id="benchmark-sample-unanswerable-oil" data-benchmark="unanswerable-oil" data-title="An uncertain past action" data-clip-start="351" data-clip-end="359" data-query="359" aria-label="An uncertain past action" hidden>
           <figure>
-            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable-oil.mp4" poster="assets/benchmark-unanswerable-oil.jpg" aria-label="A first-person view of a kitchen counter with food preparation and several bottles beside the stove. Video excerpt from 05:51 to 05:59." width="448" height="336" controls playsinline muted preload="none"></video></div>
+            <div class="benchmark-video-shell"><video src="assets/benchmark-unanswerable-oil-original.mp4" poster="assets/benchmark-unanswerable-oil-original.jpg" aria-label="A first-person view of a kitchen counter with food preparation and several bottles beside the stove. Video excerpt from 05:51 to 05:59." width="960" height="720" controls playsinline muted preload="none"></video></div>
             <div class="benchmark-playback"><button class="plain-button benchmark-play-toggle" type="button">Play excerpt</button><span>05:51–05:59</span></div>
             <div class="benchmark-timeline" role="img" aria-label="Observed video from zero to 05:59. Highlighted excerpt: 05:51 to 05:59."><div class="benchmark-timeline-track"><span class="benchmark-excerpt-range" style="left:97.7716%;width:2.2284%"></span><span class="benchmark-query-marker"></span></div><div class="benchmark-timeline-labels"><span>00:00</span><span>Observed video</span><span>05:59</span></div></div>
             <figcaption>OVO-Bench · Question at 05:59</figcaption>
@@ -214,12 +214,12 @@
         </article></div>
       </section></div>
         <!-- benchmark-examples:end -->
-        <p class="benchmark-example-note">Short excerpts from the observed video prefix. Answers are dataset reference annotations, not model predictions.</p>
+        <p class="benchmark-example-note">Original video excerpts from the observed prefix. Answers are dataset reference annotations, not model predictions.</p>
         <details class="benchmark-details"><summary>How the dataset is constructed</summary>
         <div class="benchmark-pipeline" aria-label="Benchmark construction overview"><div><span class="pipeline-index">01</span><strong>Source video + timed questions</strong><p>260 StreamBench videos<br> 95 OVO-Bench videos</p></div><span class="pipeline-arrow" aria-hidden="true">→</span><div><span class="pipeline-index">02</span><strong>Timestamp-aligned captions</strong><p>Dense video descriptions guide<br> query transformation and checking.</p></div><span class="pipeline-arrow" aria-hidden="true">→</span><div><span class="pipeline-index">03</span><strong>Three question types</strong><p>Retain, rewrite, or construct<br> questions.</p></div></div>
           <div class="data-table-wrap"><table class="data-table"><caption>Final benchmark composition</caption><thead><tr><th scope="col">Source</th><th scope="col">Videos</th><th scope="col">Standard</th><th scope="col">Ambiguous</th><th scope="col">Unanswerable</th><th scope="col">Total QA</th></tr></thead><tbody><tr><th scope="row">StreamBench</th><td>260</td><td>913</td><td>254</td><td>389</td><td>1,556</td></tr><tr><th scope="row">OVO-Bench</th><td>95</td><td>82</td><td>48</td><td>151</td><td>281</td></tr></tbody></table></div>
           <div class="construction-notes"><p><strong>Source selection and captions.</strong> OVO videos contain native HLD questions. Queries less than 5 seconds apart are filtered. MiniCPM-V 4.5 captions use 2 FPS, 448-pixel inputs, 6-second windows and a 3-second stride. Source questions are included; answers are withheld.</p><p><strong>Ambiguity review.</strong> Replace specific noun phrases with pronouns. Human review retains 302 of 404 candidates with plausible alternative referents.</p><p><strong>Unanswerable checks.</strong> For 389 StreamBench questions, check distractors against caption prefixes, remove the correct option and add “None of the above”. Screen all raw video prefixes; review 7 flagged cases. Keep the 151 native OVO-Bench HLD labels unchanged.</p></div>
-          <p class="small-note"><a href="data/benchmark-examples.json">Example annotations and frame provenance</a>.</p>
+          <p class="small-note"><a href="data/benchmark-examples.json?v=3398c9f8f0">Example annotations and frame provenance</a>.</p>
         </details>
       </div>
     </section>
@@ -262,7 +262,7 @@
 
     <section id="examples" class="wrap examples-section" aria-labelledby="examples-title">
       <div class="section-heading"><div><p class="eyebrow">Additional study · Qwen3-VL</p><h2 id="examples-title">Generated questions: a proof of concept</h2></div></div>
-      <p class="examples-intro">Five recorded cases: corrections, retrieval success, and a rejected follow-up. Replies are simulated.</p>
+      <p class="examples-intro">Five recorded cases: corrections, retrieval success, and a rejected follow-up. Original video excerpts; simulated replies.</p>
       <div id="case-tabs" class="case-tabs" role="tablist" aria-label="Recorded examples"></div>
       <p id="case-summary" class="case-summary"></p>
       <div id="example-panel" class="example-panel" role="tabpanel" tabindex="0">

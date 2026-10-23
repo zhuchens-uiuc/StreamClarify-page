@@ -1,33 +1,8 @@
 {
   "schemaVersion": 1,
-  "casesSha256": "4b79e1257401aa9f58912722bdbc34dbcde44f6674b73c6c92f2bfc4fabfaf66",
-  "totalMediaBytes": 2388060,
+  "casesSha256": "0e0dfc22e7261f3589a56b0d28f34017068edfb50c11f02abecc05f093e49dd5",
+  "totalMediaBytes": 27058841,
   "assets": [
-    {
-      "file": "assets/drill.mp4",
-      "case": "M216",
-      "kind": "video-clip",
-      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
-      "sourceTimeSeconds": [
-        10,
-        20.0
-      ],
-      "transform": "crop=448:336:0:56",
-      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
-      "sha256": "155a8e7db730a72245fd414765acb1dd2aa535c8a9baaced16feb22917f92f81",
-      "bytes": 572958
-    },
-    {
-      "file": "assets/drill-poster.jpg",
-      "case": "M216",
-      "kind": "poster",
-      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
-      "sourceTimeSeconds": 20,
-      "transform": "crop=448:336:0:56",
-      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
-      "sha256": "2856bba021661d1dcb9b146ef9dbf29ab4fb6fdb96c25d38b983cbc4364402c0",
-      "bytes": 54570
-    },
     {
       "file": "assets/drill-retrieved-1.jpg",
       "case": "M216",
@@ -60,31 +35,6 @@
       "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
       "sha256": "8907b7fd9e766efc06a998a775c44545b9419fa637ba7f8b8efdd1ed4cfc207e",
       "bytes": 46650
-    },
-    {
-      "file": "assets/microwave.mp4",
-      "case": "M282",
-      "kind": "video-clip",
-      "sourceSha256": "b174450e7a38e38f0a7332b35c55da2f72d6ff37fc7b382827a0eede2fb43bce",
-      "sourceTimeSeconds": [
-        61,
-        71.0
-      ],
-      "transform": "crop=448:252:0:98",
-      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
-      "sha256": "378325703960723a3cea96a7702ac0b6fdf20036c20cd16c30727e5b64ca6886",
-      "bytes": 194567
-    },
-    {
-      "file": "assets/microwave-poster.jpg",
-      "case": "M282",
-      "kind": "poster",
-      "sourceSha256": "b174450e7a38e38f0a7332b35c55da2f72d6ff37fc7b382827a0eede2fb43bce",
-      "sourceTimeSeconds": 70,
-      "transform": "crop=448:252:0:98",
-      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
-      "sha256": "1da2398c170ab2bb71529a6986f956bcc384f557a1ac574fe030e3266ec20b0e",
-      "bytes": 24441
     },
     {
       "file": "assets/microwave-retrieved-1.jpg",
@@ -120,31 +70,6 @@
       "bytes": 24441
     },
     {
-      "file": "assets/toolbox.mp4",
-      "case": "M251",
-      "kind": "video-clip",
-      "sourceSha256": "142e9a844083a90c4e159deb0fd78b09e1d681b43133c1f79c7beb112567e621",
-      "sourceTimeSeconds": [
-        44,
-        54.0
-      ],
-      "transform": "crop=448:336:0:56",
-      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
-      "sha256": "a8f9149085ef016a75b22648b2068952b999215e50d1d38d15299e4bd09c1e76",
-      "bytes": 340132
-    },
-    {
-      "file": "assets/toolbox-poster.jpg",
-      "case": "M251",
-      "kind": "poster",
-      "sourceSha256": "142e9a844083a90c4e159deb0fd78b09e1d681b43133c1f79c7beb112567e621",
-      "sourceTimeSeconds": 53,
-      "transform": "crop=448:336:0:56",
-      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
-      "sha256": "41c165e8ef527a5a198397e7290879e2498ab4713be9fb17aceb23c16b2e8597",
-      "bytes": 36720
-    },
-    {
       "file": "assets/toolbox-retrieved-1.jpg",
       "case": "M251",
       "kind": "retrieved-frame",
@@ -176,31 +101,6 @@
       "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
       "sha256": "41c165e8ef527a5a198397e7290879e2498ab4713be9fb17aceb23c16b2e8597",
       "bytes": 36720
-    },
-    {
-      "file": "assets/apron.mp4",
-      "case": "M084",
-      "kind": "video-clip",
-      "sourceSha256": "6f71461d345e621cd82e04976c1d2bd3e0e396259e8fddc56cfeec71d05705e3",
-      "sourceTimeSeconds": [
-        89,
-        99
-      ],
-      "transform": "crop=448:336:0:56",
-      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
-      "sha256": "0b11eb64b4d5b7d73cc6e1b60744d0b3497ce29c48a36b0f26294188425405a2",
-      "bytes": 156082
-    },
-    {
-      "file": "assets/apron-poster.jpg",
-      "case": "M084",
-      "kind": "poster",
-      "sourceSha256": "6f71461d345e621cd82e04976c1d2bd3e0e396259e8fddc56cfeec71d05705e3",
-      "sourceTimeSeconds": 93,
-      "transform": "crop=448:336:0:56",
-      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
-      "sha256": "fef83ee289fdfd2925a432469ad2fb3fc9418d2208b81fd4e47c35364a699b84",
-      "bytes": 34625
     },
     {
       "file": "assets/apron-retrieved-1.jpg",
@@ -236,31 +136,6 @@
       "bytes": 32738
     },
     {
-      "file": "assets/sofa.mp4",
-      "case": "M213",
-      "kind": "video-clip",
-      "sourceSha256": "a9998ff675437fe8ae005dadfd68aaec632e9e50a520c91c0c711294dcdbd594",
-      "sourceTimeSeconds": [
-        10,
-        20.0
-      ],
-      "transform": "crop=448:252:0:98",
-      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
-      "sha256": "52ec8aa81542324ec6f0894b7250842b395af0adc1b45040664b44f17617aa29",
-      "bytes": 168297
-    },
-    {
-      "file": "assets/sofa-poster.jpg",
-      "case": "M213",
-      "kind": "poster",
-      "sourceSha256": "a9998ff675437fe8ae005dadfd68aaec632e9e50a520c91c0c711294dcdbd594",
-      "sourceTimeSeconds": 15,
-      "transform": "crop=448:252:0:98",
-      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
-      "sha256": "60ad79d68a2f309429642bdb47b883280ad343afb48b3f59a14d699803876797",
-      "bytes": 15094
-    },
-    {
       "file": "assets/sofa-retrieved-1.jpg",
       "case": "M213",
       "kind": "retrieved-frame",
@@ -294,31 +169,6 @@
       "bytes": 6671
     },
     {
-      "file": "assets/cup.mp4",
-      "case": "M148",
-      "kind": "video-clip",
-      "sourceSha256": "d8a84e81081c12f9c442807a3f3b0f661c13ecb83e99fd9f4b8817ace342a941",
-      "sourceTimeSeconds": [
-        136,
-        146.0
-      ],
-      "transform": "crop=448:252:0:98",
-      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
-      "sha256": "a5738bdaf74eb9cb478dadca07c343e48b804adf9df6d04234867f12f403a365",
-      "bytes": 289126
-    },
-    {
-      "file": "assets/cup-poster.jpg",
-      "case": "M148",
-      "kind": "poster",
-      "sourceSha256": "d8a84e81081c12f9c442807a3f3b0f661c13ecb83e99fd9f4b8817ace342a941",
-      "sourceTimeSeconds": 146,
-      "transform": "crop=448:252:0:98",
-      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
-      "sha256": "c1eaf2f7007c75f244e93cdbf4ae1366608da924e0c79b44c7267134844cfec6",
-      "bytes": 25773
-    },
-    {
       "file": "assets/cup-retrieved-1.jpg",
       "case": "M148",
       "kind": "retrieved-frame",
@@ -350,6 +200,191 @@
       "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
       "sha256": "7d80b503c3f694b0951499651064cb8f1de9101ec8e5d3ff4004941b2ad2626f",
       "bytes": 11008
+    },
+    {
+      "file": "assets/drill-poster.jpg",
+      "case": "M216",
+      "kind": "inference-poster",
+      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
+      "sourceTimeSeconds": 20,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "2856bba021661d1dcb9b146ef9dbf29ab4fb6fdb96c25d38b983cbc4364402c0",
+      "bytes": 54570
+    },
+    {
+      "file": "assets/drill-original.mp4",
+      "case": "M216",
+      "kind": "video-clip",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "2e7e823c51553a26194dbf7671fb78a1e22851fb56fc1b2ecf72b8181daa5cdc",
+      "sourceTimeSeconds": [
+        10,
+        20.0
+      ],
+      "sourceFps": 30.0,
+      "transform": "scale=480:360:flags=lanczos,setsar=1",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "2854ee3f47752d5b80f15bead8d9cba991651f7fcae3a26bb56c61b387a675f7",
+      "bytes": 2244531
+    },
+    {
+      "file": "assets/drill-original.jpg",
+      "case": "M216",
+      "kind": "presentation-poster",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "2e7e823c51553a26194dbf7671fb78a1e22851fb56fc1b2ecf72b8181daa5cdc",
+      "sourceTimeSeconds": 20,
+      "sourceFps": 30.0,
+      "transform": "scale=480:360:flags=lanczos,setsar=1",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "abe6be3a1b0eeea07820356c637433cc2ad39a63d5927c5e0bdea828a1cd7e33",
+      "bytes": 64867
+    },
+    {
+      "file": "assets/microwave-original.mp4",
+      "case": "M282",
+      "kind": "video-clip",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "c222d0f21c48793a82760859886c90551e999387f745f694f06e3f88d0c53929",
+      "sourceTimeSeconds": [
+        61,
+        71.0
+      ],
+      "sourceFps": 29.97002997002997,
+      "transform": "scale=640:360:flags=lanczos,setsar=1",
+      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
+      "sha256": "a6223052776e0ed9ccecbf91fbe0f32c544df385aaf39e1601909f24e4489930",
+      "bytes": 1043616
+    },
+    {
+      "file": "assets/microwave-original.jpg",
+      "case": "M282",
+      "kind": "presentation-poster",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "c222d0f21c48793a82760859886c90551e999387f745f694f06e3f88d0c53929",
+      "sourceTimeSeconds": 70,
+      "sourceFps": 29.97002997002997,
+      "transform": "scale=640:360:flags=lanczos,setsar=1",
+      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
+      "sha256": "546ffb85138780fa57f5e709049f6c8b88027d4d15bc0f6f8e489f7f7a2cce56",
+      "bytes": 38989
+    },
+    {
+      "file": "assets/toolbox-original.mp4",
+      "case": "M251",
+      "kind": "video-clip",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "7341adfc7497cd4560433b666064431d8bae9d72c7d243a1b6c1aef065454998",
+      "sourceTimeSeconds": [
+        44,
+        54.0
+      ],
+      "sourceFps": 30.0,
+      "transform": "scale=480:360:flags=lanczos,setsar=1",
+      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
+      "sha256": "beb546ada43a43b333ea9a6ddbd01f23c9890c1a40fe3d109244bc7c24d33514",
+      "bytes": 1033414
+    },
+    {
+      "file": "assets/toolbox-original.jpg",
+      "case": "M251",
+      "kind": "presentation-poster",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "7341adfc7497cd4560433b666064431d8bae9d72c7d243a1b6c1aef065454998",
+      "sourceTimeSeconds": 53,
+      "sourceFps": 30.0,
+      "transform": "scale=480:360:flags=lanczos,setsar=1",
+      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
+      "sha256": "69e21e8b112bb5a2ab17aafaafced1a64bd98d93b8157c842e29b92dd5628ece",
+      "bytes": 44410
+    },
+    {
+      "file": "assets/apron-original.mp4",
+      "case": "M084",
+      "kind": "video-clip",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "6c6bb32a075c272762d5adbf0c781a0ca340b36725503aee43016c6e616ccfd7",
+      "sourceTimeSeconds": [
+        89,
+        99
+      ],
+      "sourceFps": 25.0,
+      "transform": "scale=320:240:flags=lanczos,setsar=1",
+      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
+      "sha256": "19730206668db19243ed62ef988cfe5ed097dc44e6e68b8d44bf5797badc9657",
+      "bytes": 250336
+    },
+    {
+      "file": "assets/apron-original.jpg",
+      "case": "M084",
+      "kind": "presentation-poster",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "6c6bb32a075c272762d5adbf0c781a0ca340b36725503aee43016c6e616ccfd7",
+      "sourceTimeSeconds": 93,
+      "sourceFps": 25.0,
+      "transform": "scale=320:240:flags=lanczos,setsar=1",
+      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
+      "sha256": "cb1c81286bf2a473784d55b108a9c9dfeaca24d9bccf6cd2d148c0265062889d",
+      "bytes": 23963
+    },
+    {
+      "file": "assets/sofa-original.mp4",
+      "case": "M213",
+      "kind": "video-clip",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "4cb6e3640815298feada746f2845e34577517481ad1e7ee2e31f7adeb0a6b63e",
+      "sourceTimeSeconds": [
+        10,
+        20.0
+      ],
+      "sourceFps": 30.0,
+      "transform": "scale=640:360:flags=lanczos,setsar=1",
+      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
+      "sha256": "8f39a5184bf8932d8e109e2db14877327321091587f6cd144fb0b9af4e93e3a1",
+      "bytes": 1140536
+    },
+    {
+      "file": "assets/sofa-original.jpg",
+      "case": "M213",
+      "kind": "presentation-poster",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "4cb6e3640815298feada746f2845e34577517481ad1e7ee2e31f7adeb0a6b63e",
+      "sourceTimeSeconds": 15,
+      "sourceFps": 30.0,
+      "transform": "scale=640:360:flags=lanczos,setsar=1",
+      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
+      "sha256": "efc4ecd8bce1416bd167023fb8275b72f4f53b132e00ed448894823ad07f66cb",
+      "bytes": 19413
+    },
+    {
+      "file": "assets/cup-original.mp4",
+      "case": "M148",
+      "kind": "video-clip",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "182034a6167ac53107b30b3ec3a70541169663e26fb1979f0a8ff49fcb07d819",
+      "sourceTimeSeconds": [
+        136,
+        146.0
+      ],
+      "sourceFps": 30.0,
+      "transform": "scale=640:360:flags=lanczos,setsar=1",
+      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
+      "sha256": "e16fbd259891883dfbb7d4dd9a9794b32161c17abe604072615ddfd3b91d55e6",
+      "bytes": 1533739
+    },
+    {
+      "file": "assets/cup-original.jpg",
+      "case": "M148",
+      "kind": "presentation-poster",
+      "sourceKind": "original dataset video",
+      "sourceSha256": "182034a6167ac53107b30b3ec3a70541169663e26fb1979f0a8ff49fcb07d819",
+      "sourceTimeSeconds": 146,
+      "sourceFps": 30.0,
+      "transform": "scale=640:360:flags=lanczos,setsar=1",
+      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
+      "sha256": "1fc53a4b1b4a3c4218c103fa7840daaaf2f3770194fd5f7c99f1453a32607cc2",
+      "bytes": 35162
     }
   ],
   "evaluationLabelsSha256": "0da6408df0ed37af89d88aab2542a1d4e5ac4589a99e88584c094dbca06d765d"

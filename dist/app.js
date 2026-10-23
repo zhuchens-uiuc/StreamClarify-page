@@ -65,12 +65,12 @@ function evidenceGrid(c) {
 
 function renderEvidence() {
   const c = activeCase;
-  let html = `<p class="evidence-caption">This audit shows the recorded clarification branch${c.fallbackToDirect ? ' (its direct-retrieval fallback)' : ''}; switching the answer comparison above does not change these frames or ranks. ${esc(c.evidenceNote)}</p>${evidenceGrid(c)}<p class="small-note">${esc(c.id)} · ${esc(c.source.dataset)} · question at ${timestamp(c.queryTime)} · original sampling: ${c.sourceFps} fps. Clip and retrieval frames are at or before the question timestamp. Step replay uses a presentation pace, not measured inference latency.</p>`;
+  let html = `<p class="evidence-caption">This audit shows the recorded clarification branch${c.fallbackToDirect ? ' (its direct-retrieval fallback)' : ''}; switching the answer comparison above does not change these frames or ranks. ${esc(c.evidenceNote)}</p>${evidenceGrid(c)}<p class="small-note">${esc(c.id)} · ${esc(c.source.dataset)} · question at ${timestamp(c.queryTime)} · Playback: ${Number(c.presentation.sourceFps.toFixed(2))} FPS from original footage. Retrieved frames: ${c.sourceFps} FPS inference sampling. All displayed times are at or before the question. Dialogue replay timing is illustrative.</p>`;
   const audit = cases.find((item) => item.displayRole === 'audit');
   if (audit) {
     html += `<details class="audit-case"><summary>Evidence audit: a correct-rated answer with unverified visual support</summary><p class="audit-answer">${esc(audit.description)}</p><p class="audit-answer"><strong>Question:</strong> ${esc(audit.question)}<br><strong>Simulated reply:</strong> ${esc(audit.userReply)}<br><strong>Recorded answer:</strong> ${esc(audit.answer)}</p>${evidenceGrid(audit)}<p class="small-note">${esc(audit.id)} · question at ${timestamp(audit.queryTime)}. ${esc(audit.evidenceNote)}</p></details>`;
   }
-  html += '<p class="small-note" style="margin-top:15px"><a href="data/cases.json" download>Download the recorded example data</a></p>';
+  html += '<p class="small-note" style="margin-top:15px"><a href="data/cases.json?v=0e0dfc22e7" download>Download the recorded example data</a></p>';
   $('#evidence-content').innerHTML = html;
 }
 
@@ -244,7 +244,7 @@ async function init() {
   }));
   $('#dataset-select').addEventListener('change', renderResults);
   $('#backbone-select').addEventListener('change', renderResults);
-  const loaded = await Promise.allSettled([loadJSON('data/cases.json'), loadJSON('data/results.json'), loadJSON('data/core-results.json')]);
+  const loaded = await Promise.allSettled([loadJSON('data/cases.json?v=0e0dfc22e7'), loadJSON('data/results.json'), loadJSON('data/core-results.json')]);
   if (loaded[0].status === 'fulfilled') setupCases(loaded[0].value);
   else { $('#case-title').textContent = 'Example data unavailable'; $('#dialogue').innerHTML = '<li>The example data could not load. Please reload, or read the examples in the paper.</li>'; console.error(loaded[0].reason); }
   if (loaded[1].status === 'fulfilled' && loaded[2].status === 'fulfilled') { results = loaded[1].value; coreResults = loaded[2].value; renderResults(); }

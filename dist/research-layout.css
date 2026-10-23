@@ -1,6 +1,5 @@
 :root{--blue:#315e7b;--blue-light:#edf3f7}
-.hero{padding-top:42px;padding-bottom:38px}
-.hero h1{font-size:52px;font-weight:600;letter-spacing:-.035em}
+.hero h1{font-weight:600;letter-spacing:-.035em}
 .venue{color:var(--blue);font-weight:600;letter-spacing:.11em}
 .eyebrow{color:var(--blue);font-weight:600;letter-spacing:.035em}
 .paper-links a{border-bottom:1px solid #becdd7;padding:3px 0}
@@ -73,10 +72,8 @@
  .construction-notes{grid-template-columns:1fr}
 }
 @media(max-width:620px){
- .site-header nav{gap:14px;font-size:15px}
+ .site-header nav{gap:10px;font-size:15px}
  .site-header nav a[href="#examples"]{display:none}
- .hero h1{font-size:42px}
- .hero{padding-top:30px;padding-bottom:30px}
  .section-heading h2{font-size:28px}
  .benchmark-section{margin-top:42px;padding:34px 0 30px}
  .benchmark-lead{font-size:17px}

@@ -27,14 +27,14 @@ p{margin-bottom:18px}
 .skip-link:not(:focus){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap;padding:0}
 .skip-link:focus{top:12px}
 .hero{text-align:left;padding-top:48px;padding-bottom:28px}
-.hero-grid,.hero-footer{display:grid;grid-template-columns:minmax(0,2fr) minmax(240px,.85fr);gap:72px}
+.hero-grid,.hero-footer{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:64px}
 .hero-grid{align-items:end}
 .hero-intro,.hero-credits{min-width:0}
 .hero-footer{align-items:center;margin-top:32px}
 .venue{font-size:16px;color:var(--muted);margin-bottom:12px}
 .hero h1{font-size:56px;line-height:1.15;color:var(--ink);margin-bottom:16px}
 .paper-title{font-family:var(--sans);font-size:26px;line-height:1.4;letter-spacing:-.012em;margin-bottom:0}
-.authors{display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-size:17px;margin:0;flex-wrap:wrap}
+.authors{display:flex;flex-direction:row;align-items:flex-start;column-gap:18px;row-gap:6px;font-size:17px;margin:0;flex-wrap:wrap}
 .authors span{color:var(--ink)}
 .affiliation{display:flex;justify-content:flex-start;margin-top:24px}
 .affiliation a{display:block;max-width:100%}
@@ -166,7 +166,7 @@ dialog p{font-size:15px;margin:14px 0 0}
   .method-tabs button span{margin-right:6px}
   .chart-row,.chart-axis{grid-template-columns:180px 1fr 50px;gap:12px}
 }
-@media(max-width:900px){
+@media(max-width:1000px){
   .hero-grid,.hero-footer{grid-template-columns:1fr;gap:24px}
   .hero-credits{display:flex;align-items:center;justify-content:space-between;gap:24px}
   .authors{flex-direction:row;column-gap:22px;row-gap:6px}

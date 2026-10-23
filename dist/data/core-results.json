@@ -1,0 +1,410 @@
+{
+  "trigger": {
+    "title": "When to ask: select likely errors before answering",
+    "default_backbone": "Qwen3-VL",
+    "default_metric": "precision_percent",
+    "population": {
+      "name": "StreamBench and OVO-Bench pooled",
+      "qa_count": 1837
+    },
+    "positive_label": "Incorrect initial answer under the corresponding no-clarification baseline.",
+    "precision_definition": "Among the selected queries, the percentage whose initial answers were incorrect.",
+    "recall_definition": "Among all incorrect initial answers, the percentage selected by the trigger.",
+    "backbones": [
+      {
+        "name": "Qwen3-VL",
+        "methods": [
+          {
+            "id": "random",
+            "label": "Random selection",
+            "trigger_rate_percent": 33.8,
+            "precision_percent": 41.6,
+            "recall_percent": 34.4
+          },
+          {
+            "id": "entropy",
+            "label": "Entropy selection",
+            "trigger_rate_percent": 33.0,
+            "precision_percent": 59.8,
+            "recall_percent": 48.5
+          }
+        ],
+        "precision_gain_pp": 18.2
+      },
+      {
+        "name": "LLaVA-OV-1.5",
+        "methods": [
+          {
+            "id": "random",
+            "label": "Random selection",
+            "trigger_rate_percent": 27.8,
+            "precision_percent": 44.5,
+            "recall_percent": 26.7
+          },
+          {
+            "id": "entropy",
+            "label": "Entropy selection",
+            "trigger_rate_percent": 28.4,
+            "precision_percent": 63.0,
+            "recall_percent": 38.5
+          }
+        ],
+        "precision_gain_pp": 18.5
+      },
+      {
+        "name": "InternVL-3.5",
+        "methods": [
+          {
+            "id": "random",
+            "label": "Random selection",
+            "trigger_rate_percent": 31.3,
+            "precision_percent": 43.7,
+            "recall_percent": 30.8
+          },
+          {
+            "id": "entropy",
+            "label": "Entropy selection",
+            "trigger_rate_percent": 30.9,
+            "precision_percent": 56.7,
+            "recall_percent": 39.5
+          }
+        ],
+        "precision_gain_pp": 13.0
+      }
+    ],
+    "headline": {
+      "backbone": "Qwen3-VL",
+      "random_precision_percent": 41.6,
+      "entropy_precision_percent": 59.8,
+      "gain_pp": 18.2,
+      "random_trigger_rate_percent": 33.8,
+      "entropy_trigger_rate_percent": 33.0
+    },
+    "mechanism": {
+      "score": "Binary entropy of a pre-answer [Yes]/[No] evidence-source judgment.",
+      "formula": "H(p) = -p log2(p) - (1-p) log2(1-p)",
+      "decision": "Request clarification when entropy exceeds a fixed per-backbone threshold.",
+      "threshold_setting": "Chosen from the no-clarification entropy distribution to obtain the reported operating trigger rate."
+    },
+    "scoring_ablation": {
+      "dataset": "OVO-Bench",
+      "qa_count": 281,
+      "backbone": "Qwen3-VL",
+      "regime": "Clarification, retrieval and re-answering disabled.",
+      "methods": [
+        {
+          "name": "Direct Answer",
+          "macro_accuracy_percent": 49.3,
+          "ttft_seconds": 0.085
+        },
+        {
+          "name": "Probability",
+          "macro_accuracy_percent": 50.3,
+          "ttft_seconds": 0.365
+        },
+        {
+          "name": "V/K Markers",
+          "macro_accuracy_percent": 51.3,
+          "ttft_seconds": 0.21
+        },
+        {
+          "name": "Ours (Single)",
+          "macro_accuracy_percent": 51.0,
+          "ttft_seconds": 0.1
+        },
+        {
+          "name": "Ours (Two-stage)",
+          "macro_accuracy_percent": 53.7,
+          "ttft_seconds": 0.26
+        }
+      ]
+    },
+    "directional_comparison": {
+      "dataset": "StreamBench",
+      "qa_count": 1556,
+      "backbone": "Qwen3-VL",
+      "selection_rate_percent": 30.5,
+      "selected_queries": 474,
+      "methods": [
+        {
+          "name": "Entropy",
+          "error_auroc": 0.674,
+          "precision_percent": 59.1,
+          "recall_percent": 44.4,
+          "selected_initial_errors": 280
+        },
+        {
+          "name": "p(No)",
+          "error_auroc": 0.527,
+          "precision_percent": 32.5,
+          "recall_percent": 24.4,
+          "selected_initial_errors": 154
+        }
+      ]
+    },
+    "oracle_context": {
+      "backbone": "Qwen3-VL",
+      "regime": "Oracle user guidance after a trigger; 1,837 pooled QA.",
+      "conditions": [
+        {
+          "name": "Without clarification",
+          "micro_accuracy_percent": 59.2,
+          "macro_accuracy_percent": 51.8,
+          "ttft_seconds": 0.242
+        },
+        {
+          "name": "Random trigger + oracle guidance",
+          "micro_accuracy_percent": 60.4,
+          "macro_accuracy_percent": 53.8,
+          "ttft_seconds": 1.03
+        },
+        {
+          "name": "Entropy trigger + oracle guidance",
+          "micro_accuracy_percent": 61.3,
+          "macro_accuracy_percent": 55.3,
+          "ttft_seconds": 1.019
+        }
+      ]
+    },
+    "notes": [
+      "The plotted precision comparison evaluates WHEN to trigger, using initially incorrect answers as positives. It does not measure ambiguity-detection accuracy or the probability that asking will improve an answer.",
+      "Random and entropy selection have comparable, not identical, trigger rates. Display the actual rates alongside the chart.",
+      "Table 3 evaluates downstream clarification under oracle user guidance. The trigger diagnostics use the same original no-clarification correctness labels for each backbone.",
+      "The generated-question, evaluation-only validity-gate and simulated-reply experiment is a separate proof of concept on 302 Ambiguous QA pairs; it is not the source of this trigger chart.",
+      "The entropy score does not identify whether an initial error comes from ambiguity, missing visual context, or reasoning.",
+      "Use the accepted paper's 33.0% Qwen entropy trigger rate for this comparison; do not substitute the older 33.5% artifact snapshot."
+    ],
+    "provenance": [
+      {
+        "source": "assets/paper.pdf",
+        "page": 6,
+        "section": "5.3, Oracle-Guided Analysis",
+        "table": 3,
+        "supports": "Trigger rates, precision/recall, oracle-guided accuracy and TTFT."
+      },
+      {
+        "source": "assets/paper.pdf",
+        "page": 7,
+        "section": "5.4, Pre-Answer Scoring Strategy",
+        "table": 5,
+        "supports": "Initial-answer accuracy and TTFT with clarification/retrieval disabled."
+      },
+      {
+        "source": "assets/supplement.pdf",
+        "page": 1,
+        "section": "C, Experimental Details",
+        "supports": "Same 1,837 QA keys, no-clarification correctness labels and trigger metric definitions."
+      },
+      {
+        "source": "assets/supplement.pdf",
+        "page": 4,
+        "section": "E, Directional score comparison",
+        "table": 12,
+        "supports": "Entropy versus p(No) at exactly 474/1,556 selected queries."
+      }
+    ]
+  },
+  "memory": {
+    "title": "Bounded memory under a common 6K active-context budget",
+    "default_dataset": "StreamBench",
+    "default_metric": "macro_accuracy_percent",
+    "backbone": "Qwen3-VL",
+    "regime": "Matched-6K active context; clarification disabled; full benchmarks evaluated separately.",
+    "active_context_budget_label": "6K tokens",
+    "sample_fps": 2,
+    "dense_history_equivalent_seconds_approx": 31,
+    "datasets": [
+      {
+        "name": "StreamBench",
+        "qa_count": 1556,
+        "methods": [
+          {
+            "name": "StreamChat",
+            "micro_accuracy_percent": 52.8,
+            "macro_accuracy_percent": 45.4,
+            "ttft_seconds": 0.314,
+            "processing_fps": 3.42
+          },
+          {
+            "name": "StreamBridge",
+            "micro_accuracy_percent": 57.7,
+            "macro_accuracy_percent": 45.7,
+            "ttft_seconds": 1.17,
+            "processing_fps": 24.51
+          },
+          {
+            "name": "StreamingVLM",
+            "micro_accuracy_percent": 56.7,
+            "macro_accuracy_percent": 47.8,
+            "ttft_seconds": 0.064,
+            "processing_fps": 8.86
+          },
+          {
+            "name": "StreamClarify",
+            "micro_accuracy_percent": 58.0,
+            "macro_accuracy_percent": 51.3,
+            "ttft_seconds": 0.232,
+            "processing_fps": 8.46
+          }
+        ],
+        "gains": [
+          {
+            "metric": "micro",
+            "baseline": "StreamBridge",
+            "gain_pp": 0.3,
+            "ci95_pp": [
+              -2.3,
+              3.0
+            ],
+            "interval_includes_zero": true
+          },
+          {
+            "metric": "macro",
+            "baseline": "StreamingVLM",
+            "gain_pp": 3.4,
+            "ci95_pp": [
+              1.2,
+              5.7
+            ],
+            "interval_includes_zero": false
+          }
+        ]
+      },
+      {
+        "name": "OVO-Bench",
+        "qa_count": 281,
+        "methods": [
+          {
+            "name": "StreamChat",
+            "micro_accuracy_percent": 50.5,
+            "macro_accuracy_percent": 46.2,
+            "ttft_seconds": 0.198,
+            "processing_fps": 3.68
+          },
+          {
+            "name": "StreamBridge",
+            "micro_accuracy_percent": 47.7,
+            "macro_accuracy_percent": 48.8,
+            "ttft_seconds": 1.197,
+            "processing_fps": 44.86
+          },
+          {
+            "name": "StreamingVLM",
+            "micro_accuracy_percent": 47.0,
+            "macro_accuracy_percent": 46.3,
+            "ttft_seconds": 0.071,
+            "processing_fps": 9.59
+          },
+          {
+            "name": "StreamClarify",
+            "micro_accuracy_percent": 56.9,
+            "macro_accuracy_percent": 52.0,
+            "ttft_seconds": 0.252,
+            "processing_fps": 9.23
+          }
+        ],
+        "gains": [
+          {
+            "metric": "micro",
+            "baseline": "StreamChat",
+            "gain_pp": 6.4,
+            "ci95_pp": [
+              1.1,
+              11.8
+            ],
+            "interval_includes_zero": false
+          },
+          {
+            "metric": "macro",
+            "baseline": "StreamBridge",
+            "gain_pp": 3.2,
+            "ci95_pp": [
+              -3.4,
+              9.2
+            ],
+            "interval_includes_zero": true
+          }
+        ]
+      }
+    ],
+    "metric_definition": "Macro is the unweighted mean accuracy across Standard, Ambiguous and Unanswerable QA; Micro is accuracy over all QA pairs.",
+    "interval_definition": "95% confidence intervals for paired gains from resampling complete videos.",
+    "rounding_note": "Gain values are reported from unrounded results in the accepted paper; they need not equal subtraction of the one-decimal displayed accuracies.",
+    "pressure": {
+      "total_videos": 355,
+      "methods": [
+        {
+          "name": "StreamBridge",
+          "queries_after_first_operation_percent": 84.8
+        },
+        {
+          "name": "StreamingVLM",
+          "queries_after_first_operation_percent": 86.7
+        },
+        {
+          "name": "StreamClarify",
+          "queries_after_first_operation_percent": 85.2
+        }
+      ],
+      "streamclarify_configurations": [
+        {
+          "active_context_budget_label": "6K",
+          "compressions_per_streamed_minute": 6.19,
+          "queries_after_first_compression_percent": 85.2
+        },
+        {
+          "active_context_budget_label": "10K",
+          "compressions_per_streamed_minute": 2.14,
+          "queries_after_first_compression_percent": 76.7
+        }
+      ]
+    },
+    "archive_scaling": {
+      "regime": "Separate approximately 30-minute Qwen3-VL stream, 10K TP-KV.",
+      "archive_growth_mib_per_minute_approx": 92,
+      "vision_archive_gib_approx": 2.7,
+      "retrieval_index_mib_approx": 8.5,
+      "note": "The active context is bounded. The CPU-side retrieval archive grows with stream duration unless a retention policy is applied."
+    },
+    "notes": [
+      "Each method retains its own memory design. StreamChat has no persistent visual KV cache: its 6K cap applies to query-time visual input while its native CPU archive remains available.",
+      "In this no-clarification comparison, StreamBridge, StreamingVLM and StreamClarify do not use an external retrieval archive when answering.",
+      "StreamClarify reports the highest Micro and Macro point estimates on both datasets. The StreamBench Micro and OVO-Bench Macro gain intervals include zero.",
+      "The memory experiments establish bounded active-context operation. They do not isolate verified recovery of old evidence or demonstrate a long-video accuracy advantage.",
+      "TTFT and processing throughput here describe the no-clarification regime, not the later clarification-and-retrieval interaction."
+    ],
+    "provenance": [
+      {
+        "source": "assets/paper.pdf",
+        "page": 8,
+        "section": "5.4, Matched-6K Comparison",
+        "table": 6,
+        "supports": "Matched-budget accuracy, TTFT, processing FPS and reported paired-gain confidence intervals."
+      },
+      {
+        "source": "assets/paper.pdf",
+        "page": 5,
+        "section": "5.1, Evaluation Metrics",
+        "supports": "Confidence intervals resample complete videos."
+      },
+      {
+        "source": "assets/supplement.pdf",
+        "page": 2,
+        "section": "C, Matched 6K and Memory Pressure",
+        "supports": "Method-specific budget application, inactive retrieval archives, pressure accounting."
+      },
+      {
+        "source": "assets/supplement.pdf",
+        "page": 4,
+        "section": "F, Memory Scalability and Clarification Cost",
+        "supports": "Separate CPU archive scaling measurement."
+      },
+      {
+        "source": "assets/paper.pdf",
+        "page": 8,
+        "section": "6, Conclusion and Discussion",
+        "supports": "Limits on interpreting old-evidence recovery and long-video advantage."
+      }
+    ]
+  }
+}

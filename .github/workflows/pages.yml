@@ -1,0 +1,44 @@
+name: Deploy StreamClarify project page
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dist/**'
+      - 'tools/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate website
+        run: |
+          python3 tools/check_site.py
+          python3 tools/build_benchmark.py --check
+          for file in dist/*.js; do node --check "$file"; done
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

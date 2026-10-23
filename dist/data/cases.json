@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "M216",
+      "title": "Which object do you mean?",
+      "tabLabel": "Electric drill",
+      "tabNote": "Clarifying the object",
+      "kicker": "Clarifying the referent",
+      "displayRole": "featured",
+      "description": "A short follow-up identifies the electric drill instead of the wearer's sweatshirt.",
+      "evidenceNote": "Selected frames from the recorded retrieval. The red drill is also visible at the query time; this example does not establish recovery of evicted information.",
+      "visualSupport": "The drill and its red housing are visible in the selected frames.",
+      "previewNote": "The clip shows the ten seconds before the question. Its poster is the query-time frame at 20 seconds.",
+      "video": "assets/drill.mp4",
+      "poster": "assets/drill-poster.jpg",
+      "posterTime": 20,
+      "clipStart": 10,
+      "clipEnd": 20.0,
+      "queryTime": 20.0,
+      "aspectRatio": "4 / 3",
+      "sourceFps": 2,
+      "question": "What color is this?",
+      "clarification": "What object's color are you asking about?",
+      "userReply": "I mean the electric drill I'm holding.",
+      "baseline": "The color of the person's sweatshirt in the video is blue.",
+      "direct": "The color of the shirt in the video is blue.",
+      "answer": "The electric drill you are holding is red.",
+      "success": true,
+      "fallbackToDirect": false,
+      "baselineCorrect": false,
+      "directCorrect": false,
+      "groundTruth": "The electric drill you're holding is likely black and red.",
+      "gateStatus": "valid",
+      "retrievalPhrases": [
+        "person holding electric drill",
+        "electric drill color",
+        "drill in hand"
+      ],
+      "evidence": [
+        {
+          "time": 0,
+          "image": "assets/drill-retrieved-1.jpg",
+          "label": "Retrieved frame · 0s",
+          "retrievalRank": 3,
+          "retrievedRange": [
+            0.0,
+            0.5
+          ]
+        },
+        {
+          "time": 15,
+          "image": "assets/drill-retrieved-2.jpg",
+          "label": "Retrieved frame · 15s",
+          "retrievalRank": 14,
+          "retrievedRange": [
+            15.0,
+            15.5
+          ]
+        },
+        {
+          "time": 19,
+          "image": "assets/drill-retrieved-3.jpg",
+          "label": "Retrieved frame · 19s",
+          "retrievalRank": 5,
+          "retrievedRange": [
+            19.0,
+            19.5
+          ]
+        }
+      ],
+      "source": {
+        "dataset": "StreamBench",
+        "sampleId": "StreamBench:1c53277a-eff1-4d73-bab6-62644c2029a9:20",
+        "model": "Qwen3-VL-8B-Instruct",
+        "protocol": "Saved generated-question experiment with an annotation-aware semantic gate and a template-based simulated user reply. These are recorded outputs, not a live interaction.",
+        "baselineRaw": "[Yes] The color of the person's sweatshirt in the video is blue.",
+        "answerRaw": "The electric drill you are holding is red.",
+        "framesNote": "Frames from the exact 2 fps inference cache. Existing black letterbox padding is removed; scene pixels are not altered. The displayed excerpt and poster have independently recorded source times, both at or before the question.",
+        "retrievalNote": "Selected frames lie in saved generated-branch retrieval ranges. Retrieval alone does not establish visual support or eviction from the persistent cache."
+      }
+    },
+    {
+      "id": "M282",
+      "title": "Where is the microwave?",
+      "tabLabel": "Microwave",
+      "tabNote": "From room to object location",
+      "kicker": "Locating the intended object",
+      "displayRole": "featured",
+      "description": "Naming the microwave turns a room-level answer into a specific location: above the stove.",
+      "evidenceNote": "Selected frames from the recorded clarification-branch retrieval show the microwave above the stove. These are recent frames, so this case does not demonstrate recovery of old or evicted evidence.",
+      "visualSupport": "The microwave is visibly mounted above the stove on the left side of the selected frames.",
+      "previewNote": "The clip covers 61–71 seconds. Its poster and the selected retrieved frames come from the same recent kitchen scene.",
+      "video": "assets/microwave.mp4",
+      "poster": "assets/microwave-poster.jpg",
+      "posterTime": 70,
+      "clipStart": 61,
+      "clipEnd": 71.0,
+      "queryTime": 71.0,
+      "aspectRatio": "16 / 9",
+      "sourceFps": 2,
+      "question": "Where is it?",
+      "clarification": "What specific item or location are you asking about?",
+      "userReply": "I mean microwave.",
+      "baseline": "It is in the kitchen.",
+      "direct": "It is in the kitchen.",
+      "answer": "The microwave is located above the stove in the kitchen.",
+      "success": true,
+      "fallbackToDirect": false,
+      "baselineCorrect": false,
+      "directCorrect": false,
+      "groundTruth": "The microwave is above the stove.",
+      "gateStatus": "valid",
+      "retrievalPhrases": [
+        "{\"microwave location in kitchen\", \"black microwave oven visible\","
+      ],
+      "evidence": [
+        {
+          "time": 67,
+          "image": "assets/microwave-retrieved-1.jpg",
+          "label": "Retrieved frame · 67s",
+          "retrievalRank": 16,
+          "retrievedRange": [
+            67.0,
+            67.5
+          ]
+        },
+        {
+          "time": 69,
+          "image": "assets/microwave-retrieved-2.jpg",
+          "label": "Retrieved frame · 69s",
+          "retrievalRank": 15,
+          "retrievedRange": [
+            69.0,
+            69.5
+          ]
+        },
+        {
+          "time": 70,
+          "image": "assets/microwave-retrieved-3.jpg",
+          "label": "Retrieved frame · 70s",
+          "retrievalRank": 13,
+          "retrievedRange": [
+            70.0,
+            70.5
+          ]
+        }
+      ],
+      "source": {
+        "dataset": "StreamBench",
+        "sampleId": "StreamBench:aRM59HP0ORE:71",
+        "model": "Qwen3-VL-8B-Instruct",
+        "protocol": "Saved generated-question experiment with an annotation-aware semantic gate and a template-based simulated user reply. These are recorded outputs, not a live interaction.",
+        "baselineRaw": "[Yes] It is in the kitchen.",
+        "answerRaw": "The microwave is located above the stove in the kitchen.",
+        "framesNote": "Frames from the exact 2 fps inference cache. Existing black letterbox padding is removed; scene pixels are not altered. The displayed excerpt and poster have independently recorded source times, both at or before the question.",
+        "retrievalNote": "Selected frames lie in saved generated-branch retrieval ranges. Retrieval alone does not establish visual support or eviction from the persistent cache."
+      }
+    },
+    {
+      "id": "M251",
+      "title": "Which object on the table?",
+      "tabLabel": "Toolbox",
+      "tabNote": "Resolving an object reference",
+      "kicker": "From the table to the toolbox",
+      "displayRole": "featured",
+      "description": "The follow-up specifies the toolbox. The answer changes from a description of the table to the toolbox's color.",
+      "evidenceNote": "Selected frames from the recorded clarification-branch retrieval. The toolbox is also visible near the query time; this example concerns referent selection rather than recovery of evicted information.",
+      "visualSupport": "A blue-green toolbox is visible on the wooden table. The recorded answer and the benchmark reference describe its color as blue.",
+      "previewNote": "The clip covers 44–54 seconds and shows the toolbox on the table. The poster is from 53 seconds.",
+      "video": "assets/toolbox.mp4",
+      "poster": "assets/toolbox-poster.jpg",
+      "posterTime": 53,
+      "clipStart": 44,
+      "clipEnd": 54.0,
+      "queryTime": 54.0,
+      "aspectRatio": "4 / 3",
+      "sourceFps": 2,
+      "question": "What color is that on the table?",
+      "clarification": "What specific object on the table are you referring to?",
+      "userReply": "I mean the toolbox.",
+      "baseline": "The table has a blue and white checkered pattern.",
+      "direct": "The table has a blue and white checkered pattern.",
+      "answer": "The toolbox on the table is blue.",
+      "success": true,
+      "fallbackToDirect": false,
+      "baselineCorrect": false,
+      "directCorrect": false,
+      "groundTruth": "If I didn't see wrong, the toolbox is blue.",
+      "gateStatus": "valid",
+      "retrievalPhrases": [
+        "toolbox on wooden table",
+        "blue toolbox with red handle",
+        "toolbox sitting on checkered floor"
+      ],
+      "evidence": [
+        {
+          "time": 47,
+          "image": "assets/toolbox-retrieved-1.jpg",
+          "label": "Retrieved frame · 47s",
+          "retrievalRank": 5,
+          "retrievedRange": [
+            47.0,
+            47.5
+          ]
+        },
+        {
+          "time": 51,
+          "image": "assets/toolbox-retrieved-2.jpg",
+          "label": "Retrieved frame · 51s",
+          "retrievalRank": 13,
+          "retrievedRange": [
+            51.0,
+            51.5
+          ]
+        },
+        {
+          "time": 53,
+          "image": "assets/toolbox-retrieved-3.jpg",
+          "label": "Retrieved frame · 53s",
+          "retrievalRank": 14,
+          "retrievedRange": [
+            53.0,
+            53.5
+          ]
+        }
+      ],
+      "source": {
+        "dataset": "StreamBench",
+        "sampleId": "StreamBench:1e0b85a9-7e7d-44cb-857f-81ae2da0a966:54",
+        "model": "Qwen3-VL-8B-Instruct",
+        "protocol": "Saved generated-question experiment with an annotation-aware semantic gate and a template-based simulated user reply. These are recorded outputs, not a live interaction.",
+        "baselineRaw": "[Yes] The table has a blue and white checkered pattern.",
+        "answerRaw": "The toolbox on the table is blue.",
+        "framesNote": "Frames from the exact 2 fps inference cache. Existing black letterbox padding is removed; scene pixels are not altered. The displayed excerpt and poster have independently recorded source times, both at or before the question.",
+        "retrievalNote": "Selected frames lie in saved generated-branch retrieval ranges. Retrieval alone does not establish visual support or eviction from the persistent cache."
+      }
+    },
+    {
+      "id": "M084",
+      "title": "Was she wearing an apron?",
+      "tabLabel": "Apron",
+      "tabNote": "Direct retrieval also works",
+      "kicker": "Looking back at an earlier view",
+      "displayRole": "featured",
+      "description": "The simulated reply identifies the apron, and an earlier retrieved view supports the answer. Direct retrieval gives the same correct answer in this case.",
+      "evidenceNote": "These earlier frames from the recorded clarification-branch retrieval show the short-haired woman in a green apron. The question is asked later, at 447 seconds. The record does not establish whether the earlier frames had been evicted from active context.",
+      "visualSupport": "The short-haired woman on the left is visibly wearing a green apron in all three selected frames.",
+      "previewNote": "Earlier observed clip: 01:29–01:39; question at 07:27. The poster is from 01:33. This excerpt does not establish eviction from active context.",
+      "video": "assets/apron.mp4",
+      "poster": "assets/apron-poster.jpg",
+      "posterTime": 93,
+      "clipStart": 89,
+      "clipEnd": 99,
+      "queryTime": 447.0,
+      "aspectRatio": "4 / 3",
+      "sourceFps": 2,
+      "question": "Do you remember if the short-haired woman in the video was wearing that?",
+      "clarification": "What specific item of clothing or accessory are you referring to?",
+      "userReply": "I mean an apron.",
+      "baseline": "I cannot determine if the short-haired woman in the video was wearing that because the specific item of clothing or accessory is not described or identifiable in the video frames.",
+      "direct": "Yes, the short-haired woman in the video was wearing a green apron.",
+      "answer": "Yes, the short-haired woman in the video was wearing a green apron.",
+      "success": true,
+      "fallbackToDirect": false,
+      "baselineCorrect": false,
+      "directCorrect": true,
+      "groundTruth": "Yes, The short-haired woman in the video is wearing a green apron.",
+      "gateStatus": "valid",
+      "retrievalPhrases": [
+        "woman with short hair wearing apron",
+        "person in kitchen wearing apron",
+        "close-up of apron on woman"
+      ],
+      "evidence": [
+        {
+          "time": 89,
+          "image": "assets/apron-retrieved-1.jpg",
+          "label": "Retrieved frame · 89s",
+          "retrievalRank": 6,
+          "retrievedRange": [
+            89.0,
+            89.5
+          ]
+        },
+        {
+          "time": 93,
+          "image": "assets/apron-retrieved-2.jpg",
+          "label": "Retrieved frame · 93s",
+          "retrievalRank": 10,
+          "retrievedRange": [
+            93.0,
+            93.5
+          ]
+        },
+        {
+          "time": 227,
+          "image": "assets/apron-retrieved-3.jpg",
+          "label": "Retrieved frame · 227s",
+          "retrievalRank": 8,
+          "retrievedRange": [
+            227.0,
+            227.5
+          ]
+        }
+      ],
+      "source": {
+        "dataset": "StreamBench",
+        "sampleId": "StreamBench:P-mG7YxfFPA:447",
+        "model": "Qwen3-VL-8B-Instruct",
+        "protocol": "Saved generated-question experiment with an annotation-aware semantic gate and a template-based simulated user reply. These are recorded outputs, not a live interaction.",
+        "baselineRaw": "[No] I cannot determine if the short-haired woman in the video was wearing that because the specific item of clothing or accessory is not described or identifiable in the video frames.",
+        "answerRaw": "Yes, the short-haired woman in the video was wearing a green apron.",
+        "framesNote": "Frames from the exact 2 fps inference cache. Existing black letterbox padding is removed; scene pixels are not altered. The displayed excerpt and poster have independently recorded source times, both at or before the question.",
+        "retrievalNote": "Selected frames lie in saved generated-branch retrieval ranges. Retrieval alone does not establish visual support or eviction from the persistent cache."
+      }
+    },
+    {
+      "id": "M213",
+      "title": "When a follow-up does not help",
+      "tabLabel": "Sofa",
+      "tabNote": "A failed follow-up",
+      "kicker": "A failure case",
+      "displayRole": "limitation",
+      "description": "The generated question does not identify an object. The evaluation protocol rejects it and falls back to direct retrieval, producing an incorrect answer.",
+      "evidenceNote": "Selected frames from the actual fallback retrieval. No simulated user reply was supplied after the invalid question.",
+      "visualSupport": "The red sofa is visible in the selected frame at 15 seconds, while the fallback answer says black.",
+      "previewNote": "The clip covers 10–20 seconds. Its poster is the earlier view of the sofa at 15 seconds.",
+      "video": "assets/sofa.mp4",
+      "poster": "assets/sofa-poster.jpg",
+      "posterTime": 15,
+      "clipStart": 10,
+      "clipEnd": 20.0,
+      "queryTime": 20.0,
+      "aspectRatio": "16 / 9",
+      "sourceFps": 2,
+      "question": "Can you tell me what color it is?",
+      "clarification": "What color are you referring to?",
+      "userReply": null,
+      "baseline": "The color is red.",
+      "direct": "The color is black.",
+      "answer": "The color is black.",
+      "success": false,
+      "fallbackToDirect": true,
+      "baselineCorrect": true,
+      "directCorrect": false,
+      "groundTruth": "I see a red sofa in the room.",
+      "gateStatus": "semantic_invalid",
+      "retrievalPhrases": [
+        "window with blue curtains",
+        "red couch in room",
+        "lamp on side table"
+      ],
+      "evidence": [
+        {
+          "time": 15,
+          "image": "assets/sofa-retrieved-1.jpg",
+          "label": "Retrieved frame · 15s",
+          "retrievalRank": 10,
+          "retrievedRange": [
+            15.0,
+            15.5
+          ]
+        },
+        {
+          "time": 17,
+          "image": "assets/sofa-retrieved-2.jpg",
+          "label": "Retrieved frame · 17s",
+          "retrievalRank": 2,
+          "retrievedRange": [
+            17.0,
+            17.5
+          ]
+        },
+        {
+          "time": 19,
+          "image": "assets/sofa-retrieved-3.jpg",
+          "label": "Retrieved frame · 19s",
+          "retrievalRank": 1,
+          "retrievedRange": [
+            19.0,
+            19.5
+          ]
+        }
+      ],
+      "source": {
+        "dataset": "StreamBench",
+        "sampleId": "StreamBench:1452f3dd-b036-42c1-85f8-ae6b3bf42b78:20",
+        "model": "Qwen3-VL-8B-Instruct",
+        "protocol": "Saved generated-question experiment with an annotation-aware semantic gate and a template-based simulated user reply. These are recorded outputs, not a live interaction.",
+        "baselineRaw": "[Yes] The color is red.",
+        "answerRaw": "The color is black.",
+        "framesNote": "Frames from the exact 2 fps inference cache. Existing black letterbox padding is removed; scene pixels are not altered. The displayed excerpt and poster have independently recorded source times, both at or before the question.",
+        "retrievalNote": "Selected frames lie in saved generated-branch retrieval ranges. Retrieval alone does not establish visual support or eviction from the persistent cache."
+      }
+    },
+    {
+      "id": "M148",
+      "title": "A correct answer is not the whole story",
+      "tabLabel": "Cup",
+      "tabNote": "An evidence boundary",
+      "kicker": "Inspecting the retrieved frames",
+      "displayRole": "audit",
+      "description": "The evaluator accepts the final cup-location answer, but the displayed retrieval frames do not visibly establish that location. This example is retained for inspecting the evidence boundary.",
+      "evidenceNote": "Top three recorded retrieval results. Visual support for the reported cup location has not been verified.",
+      "visualSupport": "Not verified. These frames must not be presented as visual proof of the final answer.",
+      "previewNote": "The clip covers 136–146 seconds. The retrieved frames shown below are much earlier and do not visibly establish the reported cup location.",
+      "video": "assets/cup.mp4",
+      "poster": "assets/cup-poster.jpg",
+      "posterTime": 146,
+      "clipStart": 136,
+      "clipEnd": 146.0,
+      "queryTime": 146.0,
+      "aspectRatio": "16 / 9",
+      "sourceFps": 2,
+      "question": "I need to find it. Can you help me?",
+      "clarification": "What are you trying to find?",
+      "userReply": "I mean the cup I left in the study.",
+      "baseline": "I can help you find it. The teddy bear is sitting on the desk in the center of the room, near some papers and a green box.",
+      "direct": "I cannot locate the specific item you are looking for in the video. The footage shows a cluttered room with various objects, but no particular item is clearly identifiable or highlighted. If you can provide more details about the item, I may be able to assist further.",
+      "answer": "The cup you left in the study is on the desk near the teddy bear.",
+      "success": true,
+      "fallbackToDirect": false,
+      "baselineCorrect": false,
+      "directCorrect": false,
+      "groundTruth": "Of course, your cup should be on the nearby desk.",
+      "gateStatus": "valid",
+      "retrievalPhrases": [
+        "cup on desk near teddy bear",
+        "cup beside printer on table",
+        "cup near open laptop screen"
+      ],
+      "evidence": [
+        {
+          "time": 23,
+          "image": "assets/cup-retrieved-1.jpg",
+          "label": "Retrieved frame · 23s",
+          "retrievalRank": 1,
+          "retrievedRange": [
+            23.0,
+            23.5
+          ]
+        },
+        {
+          "time": 27,
+          "image": "assets/cup-retrieved-2.jpg",
+          "label": "Retrieved frame · 27s",
+          "retrievalRank": 2,
+          "retrievedRange": [
+            27.0,
+            27.5
+          ]
+        },
+        {
+          "time": 28,
+          "image": "assets/cup-retrieved-3.jpg",
+          "label": "Retrieved frame · 28s",
+          "retrievalRank": 3,
+          "retrievedRange": [
+            28.0,
+            28.5
+          ]
+        }
+      ],
+      "source": {
+        "dataset": "StreamBench",
+        "sampleId": "StreamBench:05ee4cde-2f8d-4096-9283-7bccc6c6ed72:146",
+        "model": "Qwen3-VL-8B-Instruct",
+        "protocol": "Saved generated-question experiment with an annotation-aware semantic gate and a template-based simulated user reply. These are recorded outputs, not a live interaction.",
+        "baselineRaw": "[No] I can help you find it. The teddy bear is sitting on the desk in the center of the room, near some papers and a green box.",
+        "answerRaw": "The cup you left in the study is on the desk near the teddy bear.",
+        "framesNote": "Frames from the exact 2 fps inference cache. Existing black letterbox padding is removed; scene pixels are not altered. The displayed excerpt and poster have independently recorded source times, both at or before the question.",
+        "retrievalNote": "Selected frames lie in saved generated-branch retrieval ranges. Retrieval alone does not establish visual support or eviction from the persistent cache."
+      }
+    }
+  ]
+}

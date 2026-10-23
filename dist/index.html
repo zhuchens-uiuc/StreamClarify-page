@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StreamClarify: Proactive Clarification for Grounded Streaming Video Question Answering. WACV 2027. Explore recorded examples, the method, and experimental results.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="StreamClarify — WACV 2027">
+  <meta property="og:description" content="Proactive Clarification for Grounded Streaming Video Question Answering">
+  <meta property="og:type" content="website">
+  <title>StreamClarify · WACV 2027</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="method-animation.css">
+  <link rel="stylesheet" href="research-layout.css">
+  <script src="method-animation.js" defer></script>
+  <script src="benchmark-gallery.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#main" aria-label="StreamClarify home">StreamClarify</a>
+    <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#benchmark">Benchmark</a><a href="#results">Results</a><a href="#examples">Examples</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="title">
+      <p class="venue">WACV 2027</p>
+      <h1 id="title">StreamClarify</h1>
+      <p class="paper-title">Proactive Clarification for Grounded<br class="desktop-break"> Streaming Video Question Answering</p>
+      <p class="authors"><a href="https://zhuchens-uiuc.github.io/">Zhuchen Shao</a><span>Bo Chen</span><span>Klara Nahrstedt</span></p>
+      <div class="paper-links"><a href="assets/paper.pdf" target="_blank" rel="noopener">Paper</a><a href="assets/supplement.pdf" target="_blank" rel="noopener">Supplement</a><a href="#method">Method animation</a></div>
+      <p class="small-note paper-version">PDFs: accepted submission, in review format.</p>
+      <p class="hero-summary">A pre-answer uncertainty check for streaming video QA,<br> with bounded active context and guidance-driven retrieval.</p>
+    </section>
+
+    <div class="wrap overview-figure">
+<figure class="science-teaser" aria-labelledby="science-teaser-caption">
+  <div class="st-columns">
+    <section class="st-column st-input" aria-labelledby="st-input-title">
+      <h2 id="st-input-title"><span class="st-panel-letter">(a)</span> Streaming input</h2>
+      <div class="st-frame-strip">
+        <figure><img src="assets/drill-retrieved-1.jpg" alt="Observed drill-scene frame at 0 seconds" width="224" height="168"><figcaption>0 s</figcaption></figure>
+        <figure><img src="assets/drill-retrieved-2.jpg" alt="Observed drill-scene frame at 15 seconds" width="224" height="168"><figcaption>15 s</figcaption></figure>
+        <figure><img src="assets/drill-poster.jpg" alt="Observed drill-scene frame at the 20-second query" width="224" height="168"><figcaption>20 s · query</figcaption></figure>
+      </div>
+      <div class="st-time-axis" aria-hidden="true"><span>Observed video prefix</span><span>→ <i>t</i><sub>i</sub></span></div>
+      <p class="st-question"><span>Question <i>Q</i><sub>i</sub></span> “What color is this?”</p>
+      <p class="st-input-note">Future frames are unavailable.</p>
+    </section>
+
+    <section class="st-column st-trigger" aria-labelledby="st-trigger-title">
+      <h2 id="st-trigger-title"><span class="st-panel-letter">(b)</span> When to ask</h2>
+      <p class="st-judgment">Would the answer rely on video evidence rather than general knowledge?</p>
+      <p class="st-entropy"><span>Yes / No judgment</span><span class="st-small-arrow" aria-hidden="true">→</span><strong>entropy <i>H</i></strong></p>
+      <div class="st-branches">
+        <p class="st-direct"><span><i>H</i> ≤ τ</span><strong>Answer directly <small>active TP-KV only</small></strong></p>
+        <p class="st-request"><span><i>H</i> &gt; τ</span><strong>Request guidance</strong></p>
+      </div>
+    </section>
+
+    <section class="st-column st-memory" aria-labelledby="st-memory-title">
+      <h2 id="st-memory-title"><span class="st-panel-letter">(c)</span> Memory for re-answering</h2>
+      <p class="st-memory-condition">After requested guidance is available</p>
+      <div class="st-memory-lane st-active-lane">
+        <div class="st-lane-label"><strong>Active context</strong><span>bounded TP-KV</span></div>
+        <div class="st-cache" aria-hidden="true"><i class="st-old"></i><i class="st-old"></i><i class="st-old"></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="st-memory-lane st-archive-lane">
+        <div class="st-lane-label"><strong>Searchable archive</strong><span>separate CPU storage</span></div>
+        <div class="st-archive" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><span>…</span></div>
+      </div>
+      <p class="st-guidance"><span>User guidance supplied</span><span aria-hidden="true">→</span><strong>retrieve</strong></p>
+      <div class="st-answer-context">
+        <span class="st-prefill-arrow" aria-hidden="true">↓</span>
+        <div><strong>Temporary answering context</strong><p>active context <span aria-hidden="true">+</span> retrieved frames</p></div>
+      </div>
+    </section>
+  </div>
+  <figcaption id="science-teaser-caption" class="st-caption">Conceptual overview of trigger selection and memory.</figcaption>
+</figure>
+    </div>
+
+    <section id="setting" class="wrap setting-section" aria-labelledby="setting-title">
+      <div class="section-heading"><div><p class="eyebrow">Setting</p><h2 id="setting-title">A question arrives while the video continues</h2></div></div>
+      <p class="setting-intro">At query time <i>t</i><sub>i</sub>, a frozen streaming VLM receives a question <i>Q</i><sub>i</sub> and can use only the video prefix observed so far.</p>
+      <div class="setting-rules"><p><strong>Bounded active context.</strong> TP-KV preserves recent detail and compresses older history within an active token budget.</p><p><strong>A separate archive.</strong> CPU-side visual representations and search keys support retrieval after guidance. The archive is outside the active-context budget and can grow with video length.</p></div>
+      <p class="small-note">Evaluation uses timestamped queries in video streams. Clarification concerns the current query; prior dialogue is not a defined benchmark input. <a href="assets/paper.pdf#page=2">Paper §3.1 and §4</a></p>
+    </section>
+
+    <section id="method" class="wrap section" aria-labelledby="method-title">
+      <div class="section-heading"><div><p class="eyebrow">Core method</p><h2 id="method-title">Triggering and memory</h2></div><span class="small-note">Play the animation or select a step</span></div>
+      <div class="method-tabs" role="tablist" aria-label="Method steps">
+        <button id="method-tab-0" role="tab" aria-selected="true" aria-controls="method-panel" data-method="0"><span>01</span> Observe</button><span class="method-arrow" aria-hidden="true">→</span>
+        <button id="method-tab-1" role="tab" aria-selected="false" aria-controls="method-panel" tabindex="-1" data-method="1"><span>02</span> Check</button><span class="method-arrow" aria-hidden="true">→</span>
+        <button id="method-tab-2" role="tab" aria-selected="false" aria-controls="method-panel" tabindex="-1" data-method="2"><span>03</span> User guidance</button><span class="method-arrow" aria-hidden="true">→</span>
+        <button id="method-tab-3" role="tab" aria-selected="false" aria-controls="method-panel" tabindex="-1" data-method="3"><span>04</span> Re-answer</button>
+      </div>
+      <div class="method-panel" id="method-panel" role="tabpanel" aria-labelledby="method-tab-0">
+        <div id="method-animation" class="method-animation" role="group" aria-label="Animated overview of the StreamClarify method"></div>
+        <details class="method-explanation"><summary>About this step</summary><p class="eyebrow" id="method-step-label">01 / Observe</p><h3 id="method-step-title">Keep recent detail, compress older context.</h3><p id="method-step-description"></p><p class="method-caveat" id="method-step-note"></p></details>
+      </div>
+    </section>
+
+    <section id="benchmark" class="benchmark-section" aria-labelledby="benchmark-title">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">StreamClarify-QA</p><h2 id="benchmark-title">Explore the questions in StreamClarify-QA</h2></div></div>
+        <p class="benchmark-lead">A diagnostic benchmark of <strong>1,837 questions across 355 videos</strong>, derived from StreamBench and OVO-Bench. Browse nine real examples across three diagnostic categories, with their reference annotations.</p>
+        <div class="benchmark-bar" role="img" aria-label="995 standard, 302 ambiguous, and 540 unanswerable questions"><span class="standard" style="flex:995"></span><span class="ambiguous" style="flex:302"></span><span class="unanswerable" style="flex:540"></span></div>
+        <!-- benchmark-examples:start -->
+        <div class="benchmark-examples"><section class="benchmark-type" data-benchmark-group="standard" aria-labelledby="benchmark-heading-standard">
+        <div class="type-heading"><h3 id="benchmark-heading-standard">Standard</h3><span>995</span></div>
+        <p class="type-construction">Well-specified questions with a supported answer.</p>
+        <div class="benchmark-switcher"><span class="benchmark-scene">Finding the red teapot</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Standard example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous standard example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next standard example">→</button></div></div>
+        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-standard-teapot" data-benchmark="standard-teapot" data-title="Finding the red teapot" aria-label="Finding the red teapot">
+          <figure><img src="assets/benchmark-standard-teapot.jpg" alt="A red teapot on the kitchen island, with the refrigerator behind it." width="448" height="336" loading="lazy"><figcaption>Frame 70s · question 80s · StreamBench</figcaption></figure>
+          <p class="annotation-question"><span>Question</span>Where is a red teapot?</p><p class="annotation-answer"><span>Reference annotation</span>There is a red teapot on the cabinet opposite the refrigerator.</p>
+        </article>
+<article class="benchmark-sample" id="benchmark-sample-standard-eggplant" data-benchmark="standard-eggplant" data-title="An action at the sink" aria-label="An action at the sink" hidden>
+          <figure><img src="assets/benchmark-standard-eggplant.jpg" alt="A first-person kitchen view shows cut vegetables on a cutting board and in a bowl in the sink." width="448" height="336" loading="lazy"><figcaption>Frame 240s · question 244s · OVO-Bench</figcaption></figure>
+          <p class="annotation-question"><span>Question</span>What did I drop in the bowl in the sink?</p><ol class="benchmark-options"><li>meat</li><li>onion</li><li>eggplant</li><li>carrot</li></ol><p class="annotation-answer"><span>Reference annotation</span>eggplant</p>
+        </article>
+<article class="benchmark-sample" id="benchmark-sample-standard" data-benchmark="standard" data-title="A drill on the windowsill" aria-label="A drill on the windowsill" hidden>
+          <figure><img src="assets/benchmark-standard.jpg" alt="A power drill is visibly resting on the windowsill." width="448" height="336" loading="lazy"><figcaption>Frame 15s · question 15s · StreamBench</figcaption></figure>
+          <p class="annotation-question"><span>Question</span>I need to use a drill to make holes in the wooden strips. Where can I find such a tool?</p><p class="annotation-answer"><span>Reference annotation</span>There seems to be a drill on the windowsill to your right that you can use.</p>
+        </article></div>
+      </section>
+<section class="benchmark-type" data-benchmark-group="ambiguous" aria-labelledby="benchmark-heading-ambiguous">
+        <div class="type-heading"><h3 id="benchmark-heading-ambiguous">Referential ambiguity</h3><span>302</span></div>
+        <p class="type-construction">Questions with an unclear intended referent.</p>
+        <div class="benchmark-switcher"><span class="benchmark-scene">Which object is “this”?</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Referential ambiguity example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous referential ambiguity example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next referential ambiguity example">→</button></div></div>
+        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-ambiguous" data-benchmark="ambiguous" data-title="Which object is “this”?" aria-label="Which object is “this”?">
+          <figure><img src="assets/benchmark-ambiguous.jpg" alt="A red drill, a hammer, wooden framing and the wearer&#x27;s sweatshirt are visible." width="448" height="336" loading="lazy"><figcaption>Frame 20s · question 20s · StreamBench</figcaption></figure>
+          <p class="annotation-source"><span>Source question</span>What color is the electric drill I&#x27;m holding?</p><p class="annotation-question"><span>Question</span>What color is this?</p><p class="annotation-answer"><span>Reference annotation</span>The electric drill you&#x27;re holding is likely black and red.</p><p class="annotation-meaning">A red drill and a grey sweatshirt are both visible, but “this” does not specify the object. The source question identifies the drill.</p>
+        </article>
+<article class="benchmark-sample" id="benchmark-sample-ambiguous-apron" data-benchmark="ambiguous-apron" data-title="Remembering an item of clothing" aria-label="Remembering an item of clothing" hidden>
+          <figure><img src="assets/benchmark-ambiguous-apron.jpg" alt="Two women at a cooking counter; the short-haired woman is wearing a green apron." width="448" height="336" loading="lazy"><figcaption>Frame 93s · question 447s · StreamBench</figcaption></figure>
+          <p class="annotation-source"><span>Source question</span>Do you remember if the short-haired woman in the video was wearing an apron?</p><p class="annotation-question"><span>Question</span>Do you remember if the short-haired woman in the video was wearing that?</p><p class="annotation-answer"><span>Reference annotation</span>Yes, The short-haired woman in the video is wearing a green apron.</p>
+        </article>
+<article class="benchmark-sample" id="benchmark-sample-ambiguous-bed" data-benchmark="ambiguous-bed" data-title="Which item on the bed?" aria-label="Which item on the bed?" hidden>
+          <figure><img src="assets/benchmark-ambiguous-bed.jpg" alt="A bedroom with a blanket spread across the bed, pillows, curtains and glass doors." width="448" height="252" loading="lazy"><figcaption>Frame 156s · question 168s · OVO-Bench</figcaption></figure>
+          <p class="annotation-source"><span>Source question</span>What is the grey item on the bed?</p><p class="annotation-question"><span>Question</span>What is that on the bed?</p><ol class="benchmark-options"><li>A pillow</li><li>A cushion</li><li>A rug</li><li>A blanket</li></ol><p class="annotation-answer"><span>Reference annotation</span>A blanket</p>
+        </article></div>
+      </section>
+<section class="benchmark-type" data-benchmark-group="evidence_absent" aria-labelledby="benchmark-heading-evidence_absent">
+        <div class="type-heading"><h3 id="benchmark-heading-evidence_absent">Unanswerable</h3><span>540</span></div>
+        <p class="type-construction">No supported substantive answer option.</p>
+        <div class="benchmark-switcher"><span class="benchmark-scene">A missing color option</span><div class="benchmark-switch-controls" hidden><span class="benchmark-position" aria-live="polite" aria-atomic="true" aria-label="Unanswerable example 1 of 3">1 / 3</span><button type="button" data-benchmark-direction="-1" aria-label="Previous unanswerable example">←</button><button type="button" data-benchmark-direction="1" aria-label="Next unanswerable example">→</button></div></div>
+        <div class="benchmark-samples"><article class="benchmark-sample" id="benchmark-sample-unanswerable" data-benchmark="unanswerable" data-title="A missing color option" aria-label="A missing color option">
+          <figure><img src="assets/benchmark-unanswerable.jpg" alt="The man is visibly wearing a black cap in the kitchen. Black is absent from the substantive answer options." width="448" height="252" loading="lazy"><figcaption>Frame 3s · question 16s · StreamBench</figcaption></figure>
+          <p class="annotation-question"><span>Question</span>What color is this man&#x27;s hat?</p><ol class="benchmark-options"><li>The hat is brown.</li><li>None of the above</li><li>The hat is blue.</li><li>The hat is red.</li></ol><p class="annotation-answer"><span>Reference annotation</span>None of the above</p><p class="annotation-meaning">The hat is visible, but its original color answer is removed from the choices. None of the offered color options is supported.</p>
+        </article>
+<article class="benchmark-sample" id="benchmark-sample-unanswerable-device" data-benchmark="unanswerable-device" data-title="A missing device option" aria-label="A missing device option" hidden>
+          <figure><img src="assets/benchmark-unanswerable-device.jpg" alt="A person holds a black massage gun with a round head while connecting an adapter at a wall outlet." width="448" height="336" loading="lazy"><figcaption>Frame 6s · question 25s · StreamBench</figcaption></figure>
+          <p class="annotation-question"><span>Question</span>What did I just plug into the outlet to charge?</p><ol class="benchmark-options"><li>A wireless phone charger</li><li>A portable power bank</li><li>A handheld vacuum cleaner</li><li>None of the above</li></ol><p class="annotation-answer"><span>Reference annotation</span>None of the above</p><p class="annotation-meaning">The source answer identifies a black massage gun. That device is absent from the offered choices: a phone charger, a power bank and a vacuum cleaner.</p>
+        </article>
+<article class="benchmark-sample" id="benchmark-sample-unanswerable-oil" data-benchmark="unanswerable-oil" data-title="An uncertain past action" aria-label="An uncertain past action" hidden>
+          <figure><img src="assets/benchmark-unanswerable-oil.jpg" alt="A first-person view of a kitchen counter with food preparation and several bottles beside the stove." width="448" height="336" loading="lazy"><figcaption>Frame 359s · question 359s · OVO-Bench</figcaption></figure>
+          <p class="annotation-question"><span>Question</span>Did I close the bottle of oil?</p><ol class="benchmark-options"><li>No, I left it open</li><li>Unable to answer</li><li>The video doesn&#x27;t show this</li></ol><p class="annotation-answer"><span>Reference annotation</span>Unable to answer</p><p class="annotation-meaning">This native HLD question asks whether a particular past action occurred. OVO-Bench labels it “Unable to answer”; the illustrated still alone cannot establish absence across the observed video.</p>
+        </article></div>
+      </section></div>
+        <!-- benchmark-examples:end -->
+        <p class="benchmark-example-note">These are dataset questions and reference annotations, not model predictions. The frames illustrate the observed prefix; they are not the model’s full video input.</p>
+        <details class="benchmark-details"><summary>How the dataset is constructed</summary>
+        <div class="benchmark-pipeline" aria-label="Benchmark construction overview"><div><span class="pipeline-index">01</span><strong>Source video + timed questions</strong><p>260 StreamBench videos<br> 95 OVO-Bench videos</p></div><span class="pipeline-arrow" aria-hidden="true">→</span><div><span class="pipeline-index">02</span><strong>Timestamp-aligned captions</strong><p>Dense video descriptions guide<br> query transformation and checking.</p></div><span class="pipeline-arrow" aria-hidden="true">→</span><div><span class="pipeline-index">03</span><strong>Three question types</strong><p>Retain, rewrite, or construct<br> questions.</p></div></div>
+          <div class="data-table-wrap"><table class="data-table"><caption>Final benchmark composition</caption><thead><tr><th scope="col">Source</th><th scope="col">Videos</th><th scope="col">Standard</th><th scope="col">Ambiguous</th><th scope="col">Unanswerable</th><th scope="col">Total QA</th></tr></thead><tbody><tr><th scope="row">StreamBench</th><td>260</td><td>913</td><td>254</td><td>389</td><td>1,556</td></tr><tr><th scope="row">OVO-Bench</th><td>95</td><td>82</td><td>48</td><td>151</td><td>281</td></tr></tbody></table></div>
+          <div class="construction-notes"><p><strong>Source selection and captions.</strong> OVO-Bench videos are selected for containing HLD questions; all question types in those videos are considered. Questions less than 5 seconds after the previous query are filtered. MiniCPM-V 4.5 captions use 2 FPS, 448-pixel inputs and overlapping 6-second windows with a 3-second stride. The caption prompt includes source questions, but not their answers.</p><p><strong>Ambiguity review.</strong> Specific noun phrases are replaced by pronouns when multiple referents are plausible. All 404 candidates receive human review; 302 are retained.</p><p><strong>Unanswerable checks.</strong> For 389 StreamBench questions, distractors are checked against the caption prefix; the original correct answer is then removed from the choices and “None of the above” is added. All 389 are then screened against raw causal video; only the 7 flagged cases receive human review, which retains their labels. The 151 native OVO-Bench HLD questions are kept unchanged and are outside that audit.</p></div>
+          <p class="small-note">Construction: <a href="assets/paper.pdf#page=4">paper §4</a> and supplementary §D.1. <a href="data/benchmark-examples.json">Example annotations and frame provenance</a>.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="experiments" class="wrap section experiment-section" aria-labelledby="experiments-title">
+      <div class="section-heading"><div><p class="eyebrow">Experimental setup</p><h2 id="experiments-title">Separate the trigger, memory, and interaction studies</h2></div></div>
+      <p class="experiment-lead">The paper evaluates frozen 8B backbones—LLaVA-OV-1.5, InternVL-3.5, and Qwen3-VL—without task-specific fine-tuning. StreamClarify’s default active-context budget is 10K tokens, with a 20-second recent window and 0.25 compression ratio; retrieval selects 16 clips when enabled. The matched-budget study uses 6K instead.</p>
+      <p class="small-note">Reported numbers come from the archived paper runs. A later code audit found three out-of-order queries in one video; scheduling is corrected in the code release, and aggregate results have not been rerun.</p>
+      <div class="experiment-map" role="table" aria-label="Four experimental regimes">
+        <div class="experiment-map-head" role="row"><span role="columnheader">Study</span><span role="columnheader">Questions and comparison</span><span role="columnheader">What is measured</span></div>
+        <div role="row"><a href="#result-tab-trigger" role="cell"><span>01</span>Trigger selection</a><p role="cell">All 1,837 questions pooled across both sources; three backbones. Random and entropy triggers use comparable selection rates. Re-answering after a trigger uses <strong>oracle guidance</strong>.</p><p role="cell">Precision and recall of <strong>initial-answer errors</strong>; downstream answer accuracy and added latency.</p></div>
+        <div role="row"><a href="#result-tab-memory" role="cell"><span>02</span>Matched 6K context</a><p role="cell">Qwen3-VL, each source evaluated separately, <strong>clarification disabled</strong>. A common 6K active-context ceiling; each method retains its memory design and any separate CPU storage.</p><p role="cell">Answer accuracy under a shared active-context ceiling. This does not establish verified recovery of evicted evidence.</p></div>
+        <div role="row"><a href="#result-tab-main" role="cell"><span>03</span>Standard configuration</a><p role="cell">Each source and backbone evaluated separately, <strong>clarification disabled</strong>. Methods use their standard memory configurations. The result view below shows Qwen3-VL.</p><p role="cell">Per-type, Micro, and Macro accuracy; time to first token and video-processing FPS.</p></div>
+        <div role="row"><a href="#result-tab-clarification" role="cell"><span>04</span>Generated-question PoC</a><p role="cell">302 ambiguous questions, Qwen3-VL. An <strong>evaluation-only referent-aware gate</strong> accepts a generated follow-up before a fixed simulated reply is supplied; rejection falls back to direct retrieval. The reused entropy threshold selects 162 questions.</p><p role="cell">Answer accuracy, corrections, and harms in a controlled simulation. No live human study or natural multi-turn conversation.</p></div>
+      </div>
+      <details class="evaluation-details"><summary>Reading the metrics and comparison boundaries</summary><p>Answer correctness is judged by Qwen3-14B with dense offline captions as evaluation context. Those captions are not additional video input to the evaluated streaming model. <strong>Micro</strong> averages over questions; <strong>Macro</strong> averages the three question-type accuracies. Reported paired 95% confidence intervals resample whole videos.</p><p>Trigger precision is the fraction of selected questions whose initial answers were incorrect; recall is the fraction of initial errors selected. The trigger does not diagnose ambiguity or predict whether clarification will help. No-clarification and clarification-enabled latency are reported separately. The PoC reports model/retrieval time separately from the evaluation-only gate; these timings exclude real-user response delay.</p><p>The 6K ceiling constrains active context, not total storage. StreamChat’s limit applies to its query-time visual input; the methods retain different memory mechanisms. The CPU archive is outside StreamClarify’s active token budget. Full protocols: <a href="assets/paper.pdf#page=5">paper §5</a> and the <a href="assets/supplement.pdf">supplement</a>.</p></details>
+    </section>
+
+    <section id="results" class="wrap section" aria-labelledby="results-title">
+      <div class="section-heading"><div><p class="eyebrow">Results</p><h2 id="results-title">Trigger selection and bounded context</h2></div></div>
+      <div class="results-tabs" role="tablist" aria-label="Experiment"><button id="result-tab-trigger" role="tab" aria-selected="true" aria-controls="results-panel" data-result="trigger">Trigger selection</button><button id="result-tab-memory" role="tab" aria-selected="false" aria-controls="results-panel" tabindex="-1" data-result="memory">Matched 6K context</button><button id="result-tab-main" role="tab" aria-selected="false" aria-controls="results-panel" tabindex="-1" data-result="main">Standard configuration</button><button id="result-tab-clarification" role="tab" aria-selected="false" aria-controls="results-panel" tabindex="-1" data-result="clarification">Generated-question PoC</button></div>
+      <div id="results-panel" role="tabpanel" aria-labelledby="result-tab-trigger">
+        <div class="chart-heading"><div><h3 id="chart-title">Selecting initially incorrect answers</h3><p class="small-note" id="chart-subtitle">Trigger precision · 1,837 questions · comparable selection rates</p></div><label id="backbone-control">Backbone <select id="backbone-select"><option value="0">Qwen3-VL</option><option value="1">LLaVA-OV-1.5</option><option value="2">InternVL-3.5</option></select></label><label id="dataset-control" hidden>Dataset <select id="dataset-select"><option value="0">StreamBench</option><option value="1">OVO-Bench</option></select></label></div>
+        <div id="results-chart" class="results-chart" aria-label="Experimental accuracy results"></div>
+        <p id="core-result-note" class="core-result-note"></p>
+        <div id="clarification-result-note" class="result-insight" hidden><p><strong>34 answers corrected. 9 made worse.</strong><span>In the proof-of-concept simulation, the entropy-gated condition improves accuracy by <strong>8.3 percentage points</strong> (paired 95% CI: +4.2 to +12.5).</span></p><p class="small-note">The entropy trigger selects 162 of 302 questions. Direct retrieval runs on all questions. Selection and guidance differ across conditions.</p></div>
+        <p id="main-result-note" class="small-note" hidden>These are the paper’s no-clarification results under each method’s standard configuration. They use different memory designs and are separate from the generated-question experiment.</p>
+        <details class="result-details"><summary>Experiment details and full numbers</summary><div id="results-details-content"></div></details>
+      </div>
+
+    </section>
+
+    <section id="examples" class="wrap examples-section" aria-labelledby="examples-title">
+      <div class="section-heading"><div><p class="eyebrow">Additional study · Qwen3-VL</p><h2 id="examples-title">Generated questions: a proof of concept</h2></div></div>
+      <p class="examples-intro">Five saved interactions from the generated-question study: corrections, a case where direct retrieval also succeeds, and a rejected follow-up. Replies are simulated; the full evaluation protocol is described above.</p>
+      <div id="case-tabs" class="case-tabs" role="tablist" aria-label="Recorded examples"></div>
+      <p id="case-summary" class="case-summary"></p>
+      <div id="example-panel" class="example-panel" role="tabpanel" tabindex="0">
+        <div class="video-column">
+          <div class="video-frame"><video id="example-video" playsinline muted preload="metadata" aria-label="Video observed before the question" controls></video><div id="video-unavailable" class="video-unavailable" hidden>The video could not load. The recorded dialogue is available alongside it.</div></div>
+          <div class="video-meta"><span id="video-window">Observed video</span><button id="play-clip" class="plain-button" type="button">Play clip</button></div>
+          <p id="video-context" class="small-note" hidden></p>
+          <div class="comparison-controls" role="group" aria-label="Answer comparison"><button type="button" data-comparison="clarification" aria-pressed="true">With clarification</button><button type="button" data-comparison="baseline" aria-pressed="false">Without clarification</button><button type="button" data-comparison="direct" aria-pressed="false">Direct retrieval</button></div>
+          <p id="comparison-description" class="small-note">Step through the recorded clarification branch.</p>
+        </div>
+        <div class="dialogue-column">
+          <div class="dialogue-topline"><span id="case-title">Loading example</span><span id="query-time" class="mono"></span></div>
+          <ol id="dialogue" class="dialogue" aria-live="polite" aria-atomic="true"></ol>
+          <div class="step-controls"><button id="replay" type="button" class="plain-button replay" aria-label="Replay the interaction">Replay dialogue</button><button id="previous-step" type="button" class="plain-button" aria-label="Previous interaction step">←</button><span id="step-progress" class="step-progress" aria-label="Interaction progress"></span><button id="next-step" type="button" class="plain-button next-step">Next step →</button></div>
+        </div>
+      </div>
+      <p class="example-caption" id="example-caption">Recorded model outputs with simulated replies; not live inference.</p>
+      <details class="evidence-details"><summary>Inspect clarification-branch retrieval and the protocol</summary><div id="evidence-content"></div><p class="small-note">The experiment uses an evaluation-only validity gate with access to the annotated referent. A valid question receives a fixed referent-only reply; an invalid question falls back to direct retrieval. Retrieved frames are search outputs, not independently verified proof for the answer.</p></details>
+      <noscript><p>Enable JavaScript to explore the recorded examples and interactive figures. The <a href="assets/paper.pdf">paper</a> contains the full results.</p></noscript>
+    </section>
+
+    <section class="wrap citation-section" aria-labelledby="citation-title"><div class="citation-heading"><h2 id="citation-title">Citation</h2><div><a href="citation.bib" download class="plain-button">Download BibTeX</a><button id="copy-citation" class="plain-button" type="button">Copy</button></div></div><pre><code id="citation-text">@inproceedings{shao2027streamclarify,
+  title     = {StreamClarify: Proactive Clarification for Grounded Streaming Video Question Answering},
+  author    = {Shao, Zhuchen and Chen, Bo and Nahrstedt, Klara},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  year      = {2027}
+}</code></pre><p id="copy-status" role="status" class="small-note"></p></section>
+  </main>
+  <footer class="wrap"><span>StreamClarify · WACV 2027</span><a href="#main">Back to top ↑</a></footer>
+  <dialog id="frame-dialog"><button id="close-frame" class="icon-button" type="button" aria-label="Close retrieved frame">×</button><img id="large-frame" alt=""><p id="large-frame-caption"></p></dialog>
+</body>
+</html>

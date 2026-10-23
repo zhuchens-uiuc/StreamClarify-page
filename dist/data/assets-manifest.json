@@ -1,0 +1,356 @@
+{
+  "schemaVersion": 1,
+  "casesSha256": "4b79e1257401aa9f58912722bdbc34dbcde44f6674b73c6c92f2bfc4fabfaf66",
+  "totalMediaBytes": 2388060,
+  "assets": [
+    {
+      "file": "assets/drill.mp4",
+      "case": "M216",
+      "kind": "video-clip",
+      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
+      "sourceTimeSeconds": [
+        10,
+        20.0
+      ],
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "155a8e7db730a72245fd414765acb1dd2aa535c8a9baaced16feb22917f92f81",
+      "bytes": 572958
+    },
+    {
+      "file": "assets/drill-poster.jpg",
+      "case": "M216",
+      "kind": "poster",
+      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
+      "sourceTimeSeconds": 20,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "2856bba021661d1dcb9b146ef9dbf29ab4fb6fdb96c25d38b983cbc4364402c0",
+      "bytes": 54570
+    },
+    {
+      "file": "assets/drill-retrieved-1.jpg",
+      "case": "M216",
+      "kind": "retrieved-frame",
+      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
+      "sourceTimeSeconds": 0,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "8ac8c9668bbd4419a34f4f783021feca79c4be8055af8b349d29e459030f511f",
+      "bytes": 39400
+    },
+    {
+      "file": "assets/drill-retrieved-2.jpg",
+      "case": "M216",
+      "kind": "retrieved-frame",
+      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
+      "sourceTimeSeconds": 15,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "d14452f03621d2437eadbed6a7913cbb0d80d16c15964c25aca9c8de244fbd3b",
+      "bytes": 49523
+    },
+    {
+      "file": "assets/drill-retrieved-3.jpg",
+      "case": "M216",
+      "kind": "retrieved-frame",
+      "sourceSha256": "1a9256960b9d1f6110f719f8defeae3a46bf748902da4d3ccd5375e8c05c0361",
+      "sourceTimeSeconds": 19,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "d88c03546a72b1bba9d5f72b1e8486a191e1755057ee638c336aeb061f8cf976",
+      "sha256": "8907b7fd9e766efc06a998a775c44545b9419fa637ba7f8b8efdd1ed4cfc207e",
+      "bytes": 46650
+    },
+    {
+      "file": "assets/microwave.mp4",
+      "case": "M282",
+      "kind": "video-clip",
+      "sourceSha256": "b174450e7a38e38f0a7332b35c55da2f72d6ff37fc7b382827a0eede2fb43bce",
+      "sourceTimeSeconds": [
+        61,
+        71.0
+      ],
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
+      "sha256": "378325703960723a3cea96a7702ac0b6fdf20036c20cd16c30727e5b64ca6886",
+      "bytes": 194567
+    },
+    {
+      "file": "assets/microwave-poster.jpg",
+      "case": "M282",
+      "kind": "poster",
+      "sourceSha256": "b174450e7a38e38f0a7332b35c55da2f72d6ff37fc7b382827a0eede2fb43bce",
+      "sourceTimeSeconds": 70,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
+      "sha256": "1da2398c170ab2bb71529a6986f956bcc384f557a1ac574fe030e3266ec20b0e",
+      "bytes": 24441
+    },
+    {
+      "file": "assets/microwave-retrieved-1.jpg",
+      "case": "M282",
+      "kind": "retrieved-frame",
+      "sourceSha256": "b174450e7a38e38f0a7332b35c55da2f72d6ff37fc7b382827a0eede2fb43bce",
+      "sourceTimeSeconds": 67,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
+      "sha256": "6a21713923f124d981a841b03fbfd922e4b55377e07f4c4df0bd32d4b3c9023b",
+      "bytes": 22717
+    },
+    {
+      "file": "assets/microwave-retrieved-2.jpg",
+      "case": "M282",
+      "kind": "retrieved-frame",
+      "sourceSha256": "b174450e7a38e38f0a7332b35c55da2f72d6ff37fc7b382827a0eede2fb43bce",
+      "sourceTimeSeconds": 69,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
+      "sha256": "983e148f73c9eed1c2eef4938065eb9bb701f911421c5c95900b22cc905adb5a",
+      "bytes": 24198
+    },
+    {
+      "file": "assets/microwave-retrieved-3.jpg",
+      "case": "M282",
+      "kind": "retrieved-frame",
+      "sourceSha256": "b174450e7a38e38f0a7332b35c55da2f72d6ff37fc7b382827a0eede2fb43bce",
+      "sourceTimeSeconds": 70,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "5d24bff767d65575f4f17fbdc31be093ac31524496121af9ed412ff489e182a4",
+      "sha256": "1da2398c170ab2bb71529a6986f956bcc384f557a1ac574fe030e3266ec20b0e",
+      "bytes": 24441
+    },
+    {
+      "file": "assets/toolbox.mp4",
+      "case": "M251",
+      "kind": "video-clip",
+      "sourceSha256": "142e9a844083a90c4e159deb0fd78b09e1d681b43133c1f79c7beb112567e621",
+      "sourceTimeSeconds": [
+        44,
+        54.0
+      ],
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
+      "sha256": "a8f9149085ef016a75b22648b2068952b999215e50d1d38d15299e4bd09c1e76",
+      "bytes": 340132
+    },
+    {
+      "file": "assets/toolbox-poster.jpg",
+      "case": "M251",
+      "kind": "poster",
+      "sourceSha256": "142e9a844083a90c4e159deb0fd78b09e1d681b43133c1f79c7beb112567e621",
+      "sourceTimeSeconds": 53,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
+      "sha256": "41c165e8ef527a5a198397e7290879e2498ab4713be9fb17aceb23c16b2e8597",
+      "bytes": 36720
+    },
+    {
+      "file": "assets/toolbox-retrieved-1.jpg",
+      "case": "M251",
+      "kind": "retrieved-frame",
+      "sourceSha256": "142e9a844083a90c4e159deb0fd78b09e1d681b43133c1f79c7beb112567e621",
+      "sourceTimeSeconds": 47,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
+      "sha256": "327e6533a023ba007d0ccc06619fd71863ebd56ca1c3b94ea5e57bce88fbf0f7",
+      "bytes": 33351
+    },
+    {
+      "file": "assets/toolbox-retrieved-2.jpg",
+      "case": "M251",
+      "kind": "retrieved-frame",
+      "sourceSha256": "142e9a844083a90c4e159deb0fd78b09e1d681b43133c1f79c7beb112567e621",
+      "sourceTimeSeconds": 51,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
+      "sha256": "5281f2e0730847c9a1bee0c8dad2c2f1b338fe01d9f2c04dfaea8910bc501ebc",
+      "bytes": 29760
+    },
+    {
+      "file": "assets/toolbox-retrieved-3.jpg",
+      "case": "M251",
+      "kind": "retrieved-frame",
+      "sourceSha256": "142e9a844083a90c4e159deb0fd78b09e1d681b43133c1f79c7beb112567e621",
+      "sourceTimeSeconds": 53,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "83fbcfb4136747bc641a36715bf552edad2883f65a3e1789fd7f1fc68d9e47bb",
+      "sha256": "41c165e8ef527a5a198397e7290879e2498ab4713be9fb17aceb23c16b2e8597",
+      "bytes": 36720
+    },
+    {
+      "file": "assets/apron.mp4",
+      "case": "M084",
+      "kind": "video-clip",
+      "sourceSha256": "6f71461d345e621cd82e04976c1d2bd3e0e396259e8fddc56cfeec71d05705e3",
+      "sourceTimeSeconds": [
+        89,
+        99
+      ],
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
+      "sha256": "0b11eb64b4d5b7d73cc6e1b60744d0b3497ce29c48a36b0f26294188425405a2",
+      "bytes": 156082
+    },
+    {
+      "file": "assets/apron-poster.jpg",
+      "case": "M084",
+      "kind": "poster",
+      "sourceSha256": "6f71461d345e621cd82e04976c1d2bd3e0e396259e8fddc56cfeec71d05705e3",
+      "sourceTimeSeconds": 93,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
+      "sha256": "fef83ee289fdfd2925a432469ad2fb3fc9418d2208b81fd4e47c35364a699b84",
+      "bytes": 34625
+    },
+    {
+      "file": "assets/apron-retrieved-1.jpg",
+      "case": "M084",
+      "kind": "retrieved-frame",
+      "sourceSha256": "6f71461d345e621cd82e04976c1d2bd3e0e396259e8fddc56cfeec71d05705e3",
+      "sourceTimeSeconds": 89,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
+      "sha256": "08174dac05177985872b3c8c59ef30761b5dc69df2ae98b99cb37b7488f890a1",
+      "bytes": 34965
+    },
+    {
+      "file": "assets/apron-retrieved-2.jpg",
+      "case": "M084",
+      "kind": "retrieved-frame",
+      "sourceSha256": "6f71461d345e621cd82e04976c1d2bd3e0e396259e8fddc56cfeec71d05705e3",
+      "sourceTimeSeconds": 93,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
+      "sha256": "fef83ee289fdfd2925a432469ad2fb3fc9418d2208b81fd4e47c35364a699b84",
+      "bytes": 34625
+    },
+    {
+      "file": "assets/apron-retrieved-3.jpg",
+      "case": "M084",
+      "kind": "retrieved-frame",
+      "sourceSha256": "6f71461d345e621cd82e04976c1d2bd3e0e396259e8fddc56cfeec71d05705e3",
+      "sourceTimeSeconds": 227,
+      "transform": "crop=448:336:0:56",
+      "recordSha256": "891c8f6fb576cf28c70ca8021946b67e1bbe4896ba62d86f33277f641b086bbe",
+      "sha256": "d6831921f55ece1f6b6ad461cbae39b870110d6bc1af2f34a40589b474e1ed01",
+      "bytes": 32738
+    },
+    {
+      "file": "assets/sofa.mp4",
+      "case": "M213",
+      "kind": "video-clip",
+      "sourceSha256": "a9998ff675437fe8ae005dadfd68aaec632e9e50a520c91c0c711294dcdbd594",
+      "sourceTimeSeconds": [
+        10,
+        20.0
+      ],
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
+      "sha256": "52ec8aa81542324ec6f0894b7250842b395af0adc1b45040664b44f17617aa29",
+      "bytes": 168297
+    },
+    {
+      "file": "assets/sofa-poster.jpg",
+      "case": "M213",
+      "kind": "poster",
+      "sourceSha256": "a9998ff675437fe8ae005dadfd68aaec632e9e50a520c91c0c711294dcdbd594",
+      "sourceTimeSeconds": 15,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
+      "sha256": "60ad79d68a2f309429642bdb47b883280ad343afb48b3f59a14d699803876797",
+      "bytes": 15094
+    },
+    {
+      "file": "assets/sofa-retrieved-1.jpg",
+      "case": "M213",
+      "kind": "retrieved-frame",
+      "sourceSha256": "a9998ff675437fe8ae005dadfd68aaec632e9e50a520c91c0c711294dcdbd594",
+      "sourceTimeSeconds": 15,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
+      "sha256": "60ad79d68a2f309429642bdb47b883280ad343afb48b3f59a14d699803876797",
+      "bytes": 15094
+    },
+    {
+      "file": "assets/sofa-retrieved-2.jpg",
+      "case": "M213",
+      "kind": "retrieved-frame",
+      "sourceSha256": "a9998ff675437fe8ae005dadfd68aaec632e9e50a520c91c0c711294dcdbd594",
+      "sourceTimeSeconds": 17,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
+      "sha256": "f69b258a45bbc50742afbf8e9204688fadebee7cf2f2d027cd61c9dfeffee11a",
+      "bytes": 12391
+    },
+    {
+      "file": "assets/sofa-retrieved-3.jpg",
+      "case": "M213",
+      "kind": "retrieved-frame",
+      "sourceSha256": "a9998ff675437fe8ae005dadfd68aaec632e9e50a520c91c0c711294dcdbd594",
+      "sourceTimeSeconds": 19,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "9af2b2c2072c7e2b9ba7f810a6e851e4aec0c8b53369468e8b6186d28bfb0178",
+      "sha256": "44960e6b86c485df1490e5c76659398e2519653d4c6325cb109707639112c347",
+      "bytes": 6671
+    },
+    {
+      "file": "assets/cup.mp4",
+      "case": "M148",
+      "kind": "video-clip",
+      "sourceSha256": "d8a84e81081c12f9c442807a3f3b0f661c13ecb83e99fd9f4b8817ace342a941",
+      "sourceTimeSeconds": [
+        136,
+        146.0
+      ],
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
+      "sha256": "a5738bdaf74eb9cb478dadca07c343e48b804adf9df6d04234867f12f403a365",
+      "bytes": 289126
+    },
+    {
+      "file": "assets/cup-poster.jpg",
+      "case": "M148",
+      "kind": "poster",
+      "sourceSha256": "d8a84e81081c12f9c442807a3f3b0f661c13ecb83e99fd9f4b8817ace342a941",
+      "sourceTimeSeconds": 146,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
+      "sha256": "c1eaf2f7007c75f244e93cdbf4ae1366608da924e0c79b44c7267134844cfec6",
+      "bytes": 25773
+    },
+    {
+      "file": "assets/cup-retrieved-1.jpg",
+      "case": "M148",
+      "kind": "retrieved-frame",
+      "sourceSha256": "d8a84e81081c12f9c442807a3f3b0f661c13ecb83e99fd9f4b8817ace342a941",
+      "sourceTimeSeconds": 23,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
+      "sha256": "79b1a5aa960523c01f937336b9d0562cad6e7d5c45dac483f329d6432ec7cc44",
+      "bytes": 11064
+    },
+    {
+      "file": "assets/cup-retrieved-2.jpg",
+      "case": "M148",
+      "kind": "retrieved-frame",
+      "sourceSha256": "d8a84e81081c12f9c442807a3f3b0f661c13ecb83e99fd9f4b8817ace342a941",
+      "sourceTimeSeconds": 27,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
+      "sha256": "23dc92d3a97b672fbef28ca884934c268f7bd6f584c06a6bb04677ce8cdbdeb4",
+      "bytes": 10359
+    },
+    {
+      "file": "assets/cup-retrieved-3.jpg",
+      "case": "M148",
+      "kind": "retrieved-frame",
+      "sourceSha256": "d8a84e81081c12f9c442807a3f3b0f661c13ecb83e99fd9f4b8817ace342a941",
+      "sourceTimeSeconds": 28,
+      "transform": "crop=448:252:0:98",
+      "recordSha256": "bc3595dd2db1559c32fb0cf26e4141d6150477e2f47fb1f9c0a6a0838d6e95f2",
+      "sha256": "7d80b503c3f694b0951499651064cb8f1de9101ec8e5d3ff4004941b2ad2626f",
+      "bytes": 11008
+    }
+  ],
+  "evaluationLabelsSha256": "0da6408df0ed37af89d88aab2542a1d4e5ac4589a99e88584c094dbca06d765d"
+}

@@ -1,0 +1,218 @@
+{
+  "schema_version": "streamclarify-project-results-v1",
+  "benchmark": {
+    "name": "StreamClarify-QA",
+    "total_qa": 1837,
+    "total_videos": 355,
+    "categories": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "count": 995
+      },
+      {
+        "id": "ambiguous",
+        "label": "Referential ambiguity",
+        "count": 302
+      },
+      {
+        "id": "unanswerable",
+        "label": "Unanswerable",
+        "count": 540
+      }
+    ],
+    "datasets": [
+      {
+        "name": "StreamBench",
+        "qa_count": 1556,
+        "video_count": 260,
+        "standard": 913,
+        "ambiguous": 254,
+        "unanswerable": 389
+      },
+      {
+        "name": "OVO-Bench",
+        "qa_count": 281,
+        "video_count": 95,
+        "standard": 82,
+        "ambiguous": 48,
+        "unanswerable": 151
+      }
+    ],
+    "source": "Accepted manuscript, Table 1 and Section 4.3."
+  },
+  "clarification": {
+    "title": "Generated clarification on ambiguous questions",
+    "model": "Qwen3-VL-8B-Instruct",
+    "denominator": 302,
+    "executed_interventions": 301,
+    "accuracy_unit": "percent",
+    "conditions": [
+      {
+        "id": "without_clarification",
+        "label": "Without clarification",
+        "selection": "None",
+        "correct": 68,
+        "accuracy_percent": 22.5,
+        "wrong_to_correct": 0,
+        "correct_to_wrong": 0
+      },
+      {
+        "id": "entropy_gated_generated",
+        "label": "Generated clarification",
+        "selection": "Entropy-gated",
+        "correct": 93,
+        "accuracy_percent": 30.8,
+        "wrong_to_correct": 34,
+        "correct_to_wrong": 9
+      },
+      {
+        "id": "direct_retrieval",
+        "label": "Direct retrieval",
+        "selection": "All queries",
+        "correct": 69,
+        "accuracy_percent": 22.8,
+        "wrong_to_correct": 20,
+        "correct_to_wrong": 19
+      },
+      {
+        "id": "generated_forced_on",
+        "label": "Generated clarification",
+        "selection": "All queries",
+        "correct": 105,
+        "accuracy_percent": 34.8,
+        "wrong_to_correct": 55,
+        "correct_to_wrong": 18
+      },
+      {
+        "id": "oracle",
+        "label": "Oracle guidance",
+        "selection": "All queries",
+        "correct": 116,
+        "accuracy_percent": 38.4,
+        "wrong_to_correct": 62,
+        "correct_to_wrong": 14
+      }
+    ],
+    "gated": {
+      "triggered": 162,
+      "not_triggered": 140,
+      "trigger_rate_percent": 53.6,
+      "entropy_threshold_bits": 0.275,
+      "correct": 93,
+      "wrong_to_correct": 34,
+      "correct_to_wrong": 9,
+      "net_correct": 25,
+      "gain_pp": 8.3,
+      "ci95_pp": [
+        4.2,
+        12.5
+      ],
+      "ci_method": "Paired video-level bootstrap"
+    },
+    "protocol_note": "Controlled simulation on all 302 Ambiguous QA pairs. Generated questions use an evaluation-only validity gate and simulated referent-only user replies; this is not a human study. The gate has access to the intended referent. Rejected questions fall back to direct retrieval. On accepted questions, Generated and Oracle receive the same reply by construction.",
+    "selection_note": "Entropy-gated Generated uses the Generated outcome on 162 triggered questions and preserves the original no-clarification answer on the other 140. The all-query conditions bypass entropy selection.",
+    "denominator_note": "The one unexecuted intervention record remains in the 302-item denominator and counts as incorrect for intervention outcomes. The frozen baseline retains its original answer.",
+    "evaluation": "Frozen Qwen3-14B caption-context evaluator v20.",
+    "source": "Accepted manuscript, Table 4 and Section 5.3; saved per-item outcome aggregation."
+  },
+  "qwen_main": {
+    "title": "Qwen3-VL main comparison without clarification",
+    "model": "Qwen3-VL-8B-Instruct",
+    "regime": "No clarification; each method uses its standard configuration.",
+    "macro_definition": "Unweighted mean accuracy across Standard, Ambiguous, and Unanswerable question types, computed separately for each source dataset.",
+    "latency_note": "TTFT is time to first token in the no-clarification regime. These timings do not describe the clarification interaction above.",
+    "budget_note": "This is the standard-configuration comparison in Table 2. It is not the matched-6K-context comparison in Table 6.",
+    "datasets": [
+      {
+        "name": "StreamBench",
+        "qa_count": 1556,
+        "methods": [
+          {
+            "name": "StreamChat",
+            "macro_accuracy_percent": 46.3,
+            "micro_accuracy_percent": 53.5,
+            "ttft_seconds": 0.305,
+            "processing_fps": 3.5
+          },
+          {
+            "name": "StreamBridge",
+            "macro_accuracy_percent": 45.0,
+            "micro_accuracy_percent": 57.2,
+            "ttft_seconds": 2.657,
+            "processing_fps": 16.68
+          },
+          {
+            "name": "StreamingVLM",
+            "macro_accuracy_percent": 48.0,
+            "micro_accuracy_percent": 57.1,
+            "ttft_seconds": 0.062,
+            "processing_fps": 8.7
+          },
+          {
+            "name": "StreamClarify",
+            "macro_accuracy_percent": 51.3,
+            "micro_accuracy_percent": 59.5,
+            "ttft_seconds": 0.239,
+            "processing_fps": 10.16
+          }
+        ]
+      },
+      {
+        "name": "OVO-Bench",
+        "qa_count": 281,
+        "methods": [
+          {
+            "name": "StreamChat",
+            "macro_accuracy_percent": 45.6,
+            "micro_accuracy_percent": 50.2,
+            "ttft_seconds": 0.191,
+            "processing_fps": 3.79
+          },
+          {
+            "name": "StreamBridge",
+            "macro_accuracy_percent": 45.9,
+            "micro_accuracy_percent": 44.1,
+            "ttft_seconds": 2.857,
+            "processing_fps": 36.93
+          },
+          {
+            "name": "StreamingVLM",
+            "macro_accuracy_percent": 45.4,
+            "micro_accuracy_percent": 46.3,
+            "ttft_seconds": 0.069,
+            "processing_fps": 9.33
+          },
+          {
+            "name": "StreamClarify",
+            "macro_accuracy_percent": 53.7,
+            "micro_accuracy_percent": 57.7,
+            "ttft_seconds": 0.26,
+            "processing_fps": 12.38
+          }
+        ]
+      }
+    ],
+    "source": "Accepted manuscript, Table 2; accuracy verified against main_table_reproduction.csv."
+  },
+  "provenance": {
+    "paper_assets": [
+      {
+        "path": "assets/paper.pdf",
+        "sha256": "bfe5a5390a7571a1dc781e7c4da086f60dad5ff748cb45b8313b339befc2d17c",
+        "version": "Accepted submission; supplied anonymous review copy, not camera-ready."
+      },
+      {
+        "path": "assets/supplement.pdf",
+        "sha256": "1f4252a249e772ade35239743de027e490bbf8030463f9d0008a74c3add8f34c",
+        "version": "Accepted submission; supplied anonymous review copy, not camera-ready."
+      }
+    ],
+    "clarification_source": "Accepted paper, Table 4",
+    "main_accuracy_source": "Accepted paper, Table 2",
+    "main_runtime_source": "Accepted paper, Table 2",
+    "benchmark_source": "Accepted paper, Table 1",
+    "confidence_interval_source": "Accepted paper, Section 5.3",
+    "data_note": "Static presentation data, transcribed from the supplied accepted manuscript and checked against existing experiment artifacts. No inference rerun."
+  }
+}

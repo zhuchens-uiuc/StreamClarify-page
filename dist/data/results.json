@@ -196,18 +196,6 @@
     "source": "Accepted manuscript, Table 2; accuracy verified against main_table_reproduction.csv."
   },
   "provenance": {
-    "paper_assets": [
-      {
-        "path": "assets/paper.pdf",
-        "sha256": "bfe5a5390a7571a1dc781e7c4da086f60dad5ff748cb45b8313b339befc2d17c",
-        "version": "Accepted submission; supplied anonymous review copy, not camera-ready."
-      },
-      {
-        "path": "assets/supplement.pdf",
-        "sha256": "1f4252a249e772ade35239743de027e490bbf8030463f9d0008a74c3add8f34c",
-        "version": "Accepted submission; supplied anonymous review copy, not camera-ready."
-      }
-    ],
     "clarification_source": "Accepted paper, Table 4",
     "main_accuracy_source": "Accepted paper, Table 2",
     "main_runtime_source": "Accepted paper, Table 2",

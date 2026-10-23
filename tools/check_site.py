@@ -164,8 +164,8 @@ def main():
     for c in data['conditions']:
         require(round(c['correct'] / data['denominator'] * 100, 1) == c['accuracy_percent'], f'Wrong accuracy: {c["id"]}')
         require(baseline + c['wrong_to_correct'] - c['correct_to_wrong'] == c['correct'], f'Wrong paired change: {c["id"]}')
-    for artifact in results['provenance']['paper_assets']:
-        require(hashlib.sha256((DIST / artifact['path']).read_bytes()).hexdigest() == artifact['sha256'], f'Paper hash changed: {artifact["path"]}')
+    require(not list(DIST.rglob('*.pdf')), 'Manuscript PDFs are temporarily withheld')
+    require(not re.search(r'(?:href|src)=[\"\'][^\"\']*\.pdf', html, re.IGNORECASE), 'PDF download link remains')
     for backbone in core['trigger']['backbones']:
         random, entropy = backbone['methods']
         require(round(entropy['precision_percent'] - random['precision_percent'], 1) == backbone['precision_gain_pp'], f'Trigger precision difference mismatch: {backbone["name"]}')

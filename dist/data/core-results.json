@@ -176,27 +176,27 @@
     ],
     "provenance": [
       {
-        "source": "assets/paper.pdf",
+        "source": "Accepted manuscript",
         "page": 6,
         "section": "5.3, Oracle-Guided Analysis",
         "table": 3,
         "supports": "Trigger rates, precision/recall, oracle-guided accuracy and TTFT."
       },
       {
-        "source": "assets/paper.pdf",
+        "source": "Accepted manuscript",
         "page": 7,
         "section": "5.4, Pre-Answer Scoring Strategy",
         "table": 5,
         "supports": "Initial-answer accuracy and TTFT with clarification/retrieval disabled."
       },
       {
-        "source": "assets/supplement.pdf",
+        "source": "Supplementary protocol",
         "page": 1,
         "section": "C, Experimental Details",
         "supports": "Same 1,837 QA keys, no-clarification correctness labels and trigger metric definitions."
       },
       {
-        "source": "assets/supplement.pdf",
+        "source": "Supplementary protocol",
         "page": 4,
         "section": "E, Directional score comparison",
         "table": 12,
@@ -375,32 +375,32 @@
     ],
     "provenance": [
       {
-        "source": "assets/paper.pdf",
+        "source": "Accepted manuscript",
         "page": 8,
         "section": "5.4, Matched-6K Comparison",
         "table": 6,
         "supports": "Matched-budget accuracy, TTFT, processing FPS and reported paired-gain confidence intervals."
       },
       {
-        "source": "assets/paper.pdf",
+        "source": "Accepted manuscript",
         "page": 5,
         "section": "5.1, Evaluation Metrics",
         "supports": "Confidence intervals resample complete videos."
       },
       {
-        "source": "assets/supplement.pdf",
+        "source": "Supplementary protocol",
         "page": 2,
         "section": "C, Matched 6K and Memory Pressure",
         "supports": "Method-specific budget application, inactive retrieval archives, pressure accounting."
       },
       {
-        "source": "assets/supplement.pdf",
+        "source": "Supplementary protocol",
         "page": 4,
         "section": "F, Memory Scalability and Clarification Cost",
         "supports": "Separate CPU archive scaling measurement."
       },
       {
-        "source": "assets/paper.pdf",
+        "source": "Accepted manuscript",
         "page": 8,
         "section": "6, Conclusion and Discussion",
         "supports": "Limits on interpreting old-evidence recovery and long-video advantage."
